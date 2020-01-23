@@ -1,0 +1,716 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		18076B8D23D7F7E3003E2ACD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18076B8C23D7F7E3003E2ACD /* AppDelegate.m */; };
+		18076B9023D7F7E3003E2ACD /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18076B8F23D7F7E3003E2ACD /* SceneDelegate.m */; };
+		18076B9623D7F7E3003E2ACD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18076B9423D7F7E3003E2ACD /* Main.storyboard */; };
+		18076B9823D7F7E6003E2ACD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18076B9723D7F7E6003E2ACD /* Assets.xcassets */; };
+		18076B9B23D7F7E6003E2ACD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18076B9923D7F7E6003E2ACD /* LaunchScreen.storyboard */; };
+		18076B9E23D7F7E6003E2ACD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18076B9D23D7F7E6003E2ACD /* main.m */; };
+		18076BA823D7F7E7003E2ACD /* MAFDroneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18076BA723D7F7E7003E2ACD /* MAFDroneTests.m */; };
+		18076BB323D7F7E7003E2ACD /* MAFDroneUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18076BB223D7F7E7003E2ACD /* MAFDroneUITests.m */; };
+		184ADB2C23D811FF00FCB477 /* DJIRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184ADB2B23D811FF00FCB477 /* DJIRootViewController.m */; };
+		184ADB2F23D816C200FCB477 /* DJIMapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184ADB2E23D816C200FCB477 /* DJIMapController.m */; };
+		184ADB3323D818CD00FCB477 /* DJIAircraftAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 184ADB3223D818CD00FCB477 /* DJIAircraftAnnotation.m */; };
+		184ADB3623D8195A00FCB477 /* DJIAircraftAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 184ADB3523D8195A00FCB477 /* DJIAircraftAnnotationView.m */; };
+		184ADB3923D819C000FCB477 /* DJIGSButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184ADB3823D819C000FCB477 /* DJIGSButtonViewController.m */; };
+		184ADB3B23D81A1200FCB477 /* DJIGSButtonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184ADB3A23D81A1200FCB477 /* DJIGSButtonViewController.xib */; };
+		184ADB3E23D81BC900FCB477 /* DJIWaypointConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184ADB3D23D81BC900FCB477 /* DJIWaypointConfigViewController.m */; };
+		184ADB4023D81C1000FCB477 /* DJIWaypointConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184ADB3F23D81C1000FCB477 /* DJIWaypointConfigViewController.xib */; };
+		184ADB4423D81CCC00FCB477 /* DemoUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 184ADB4323D81CCC00FCB477 /* DemoUtility.m */; };
+		F8708C96598372E0312BAAD0 /* libPods-MAFDrone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F31ECEDA450D03DA2CF28B42 /* libPods-MAFDrone.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		18076BA423D7F7E7003E2ACD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18076B8023D7F7E3003E2ACD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 18076B8723D7F7E3003E2ACD;
+			remoteInfo = MAFDrone;
+		};
+		18076BAF23D7F7E7003E2ACD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18076B8023D7F7E3003E2ACD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 18076B8723D7F7E3003E2ACD;
+			remoteInfo = MAFDrone;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		18076B8823D7F7E3003E2ACD /* MAFDrone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MAFDrone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18076B8B23D7F7E3003E2ACD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		18076B8C23D7F7E3003E2ACD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		18076B8E23D7F7E3003E2ACD /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		18076B8F23D7F7E3003E2ACD /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		18076B9523D7F7E3003E2ACD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		18076B9723D7F7E6003E2ACD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		18076B9A23D7F7E6003E2ACD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		18076B9C23D7F7E6003E2ACD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18076B9D23D7F7E6003E2ACD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		18076BA323D7F7E7003E2ACD /* MAFDroneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MAFDroneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18076BA723D7F7E7003E2ACD /* MAFDroneTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAFDroneTests.m; sourceTree = "<group>"; };
+		18076BA923D7F7E7003E2ACD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18076BAE23D7F7E7003E2ACD /* MAFDroneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MAFDroneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18076BB223D7F7E7003E2ACD /* MAFDroneUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAFDroneUITests.m; sourceTree = "<group>"; };
+		18076BB423D7F7E7003E2ACD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		184ADB2B23D811FF00FCB477 /* DJIRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJIRootViewController.m; sourceTree = "<group>"; };
+		184ADB2D23D8139400FCB477 /* DJIRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJIRootViewController.h; sourceTree = "<group>"; };
+		184ADB2E23D816C200FCB477 /* DJIMapController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJIMapController.m; sourceTree = "<group>"; };
+		184ADB3023D816D800FCB477 /* DJIMapController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJIMapController.h; sourceTree = "<group>"; };
+		184ADB3123D818BD00FCB477 /* DJIAircraftAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJIAircraftAnnotation.h; sourceTree = "<group>"; };
+		184ADB3223D818CD00FCB477 /* DJIAircraftAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJIAircraftAnnotation.m; sourceTree = "<group>"; };
+		184ADB3423D8194D00FCB477 /* DJIAircraftAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJIAircraftAnnotationView.h; sourceTree = "<group>"; };
+		184ADB3523D8195A00FCB477 /* DJIAircraftAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJIAircraftAnnotationView.m; sourceTree = "<group>"; };
+		184ADB3723D819B300FCB477 /* DJIGSButtonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJIGSButtonViewController.h; sourceTree = "<group>"; };
+		184ADB3823D819C000FCB477 /* DJIGSButtonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJIGSButtonViewController.m; sourceTree = "<group>"; };
+		184ADB3A23D81A1200FCB477 /* DJIGSButtonViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DJIGSButtonViewController.xib; sourceTree = "<group>"; };
+		184ADB3C23D81BBE00FCB477 /* DJIWaypointConfigViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJIWaypointConfigViewController.h; sourceTree = "<group>"; };
+		184ADB3D23D81BC900FCB477 /* DJIWaypointConfigViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJIWaypointConfigViewController.m; sourceTree = "<group>"; };
+		184ADB3F23D81C1000FCB477 /* DJIWaypointConfigViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DJIWaypointConfigViewController.xib; sourceTree = "<group>"; };
+		184ADB4223D81CAF00FCB477 /* DemoUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoUtility.h; sourceTree = "<group>"; };
+		184ADB4323D81CCC00FCB477 /* DemoUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUtility.m; sourceTree = "<group>"; };
+		184ADB4523D81E0A00FCB477 /* GSDemo-pch.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GSDemo-pch.pch"; sourceTree = "<group>"; };
+		411F131DDF35C307DE63DB00 /* Pods-MAFDrone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MAFDrone.debug.xcconfig"; path = "Target Support Files/Pods-MAFDrone/Pods-MAFDrone.debug.xcconfig"; sourceTree = "<group>"; };
+		AAE53B36EA413D9540F580F0 /* Pods-MAFDrone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MAFDrone.release.xcconfig"; path = "Target Support Files/Pods-MAFDrone/Pods-MAFDrone.release.xcconfig"; sourceTree = "<group>"; };
+		F31ECEDA450D03DA2CF28B42 /* libPods-MAFDrone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MAFDrone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		18076B8523D7F7E3003E2ACD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8708C96598372E0312BAAD0 /* libPods-MAFDrone.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18076BA023D7F7E7003E2ACD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18076BAB23D7F7E7003E2ACD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18076B7F23D7F7E3003E2ACD = {
+			isa = PBXGroup;
+			children = (
+				18076B8A23D7F7E3003E2ACD /* MAFDrone */,
+				18076BA623D7F7E7003E2ACD /* MAFDroneTests */,
+				18076BB123D7F7E7003E2ACD /* MAFDroneUITests */,
+				18076B8923D7F7E3003E2ACD /* Products */,
+				342BBB5834A761C96DFF6C43 /* Pods */,
+				25A9DF8B256737AA9815A336 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		18076B8923D7F7E3003E2ACD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18076B8823D7F7E3003E2ACD /* MAFDrone.app */,
+				18076BA323D7F7E7003E2ACD /* MAFDroneTests.xctest */,
+				18076BAE23D7F7E7003E2ACD /* MAFDroneUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18076B8A23D7F7E3003E2ACD /* MAFDrone */ = {
+			isa = PBXGroup;
+			children = (
+				18076B8B23D7F7E3003E2ACD /* AppDelegate.h */,
+				18076B8C23D7F7E3003E2ACD /* AppDelegate.m */,
+				184ADB3123D818BD00FCB477 /* DJIAircraftAnnotation.h */,
+				184ADB3223D818CD00FCB477 /* DJIAircraftAnnotation.m */,
+				184ADB3423D8194D00FCB477 /* DJIAircraftAnnotationView.h */,
+				184ADB3523D8195A00FCB477 /* DJIAircraftAnnotationView.m */,
+				184ADB3723D819B300FCB477 /* DJIGSButtonViewController.h */,
+				184ADB4123D81C9600FCB477 /* GSDemo */,
+				184ADB3823D819C000FCB477 /* DJIGSButtonViewController.m */,
+				184ADB3A23D81A1200FCB477 /* DJIGSButtonViewController.xib */,
+				184ADB3023D816D800FCB477 /* DJIMapController.h */,
+				184ADB2E23D816C200FCB477 /* DJIMapController.m */,
+				184ADB2D23D8139400FCB477 /* DJIRootViewController.h */,
+				184ADB2B23D811FF00FCB477 /* DJIRootViewController.m */,
+				184ADB3C23D81BBE00FCB477 /* DJIWaypointConfigViewController.h */,
+				184ADB3D23D81BC900FCB477 /* DJIWaypointConfigViewController.m */,
+				184ADB3F23D81C1000FCB477 /* DJIWaypointConfigViewController.xib */,
+				18076B8E23D7F7E3003E2ACD /* SceneDelegate.h */,
+				184ADB4523D81E0A00FCB477 /* GSDemo-pch.pch */,
+				18076B8F23D7F7E3003E2ACD /* SceneDelegate.m */,
+				18076B9423D7F7E3003E2ACD /* Main.storyboard */,
+				18076B9723D7F7E6003E2ACD /* Assets.xcassets */,
+				18076B9923D7F7E6003E2ACD /* LaunchScreen.storyboard */,
+				18076B9C23D7F7E6003E2ACD /* Info.plist */,
+				18076B9D23D7F7E6003E2ACD /* main.m */,
+			);
+			path = MAFDrone;
+			sourceTree = "<group>";
+		};
+		18076BA623D7F7E7003E2ACD /* MAFDroneTests */ = {
+			isa = PBXGroup;
+			children = (
+				18076BA723D7F7E7003E2ACD /* MAFDroneTests.m */,
+				18076BA923D7F7E7003E2ACD /* Info.plist */,
+			);
+			path = MAFDroneTests;
+			sourceTree = "<group>";
+		};
+		18076BB123D7F7E7003E2ACD /* MAFDroneUITests */ = {
+			isa = PBXGroup;
+			children = (
+				18076BB223D7F7E7003E2ACD /* MAFDroneUITests.m */,
+				18076BB423D7F7E7003E2ACD /* Info.plist */,
+			);
+			path = MAFDroneUITests;
+			sourceTree = "<group>";
+		};
+		184ADB4123D81C9600FCB477 /* GSDemo */ = {
+			isa = PBXGroup;
+			children = (
+				184ADB4223D81CAF00FCB477 /* DemoUtility.h */,
+				184ADB4323D81CCC00FCB477 /* DemoUtility.m */,
+			);
+			path = GSDemo;
+			sourceTree = "<group>";
+		};
+		25A9DF8B256737AA9815A336 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F31ECEDA450D03DA2CF28B42 /* libPods-MAFDrone.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		342BBB5834A761C96DFF6C43 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				411F131DDF35C307DE63DB00 /* Pods-MAFDrone.debug.xcconfig */,
+				AAE53B36EA413D9540F580F0 /* Pods-MAFDrone.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		18076B8723D7F7E3003E2ACD /* MAFDrone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18076BB723D7F7E7003E2ACD /* Build configuration list for PBXNativeTarget "MAFDrone" */;
+			buildPhases = (
+				EBFC908BDBEF35CFA9D95DBD /* [CP] Check Pods Manifest.lock */,
+				18076B8423D7F7E3003E2ACD /* Sources */,
+				18076B8523D7F7E3003E2ACD /* Frameworks */,
+				18076B8623D7F7E3003E2ACD /* Resources */,
+				354566591C971FE7531FD01C /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MAFDrone;
+			productName = MAFDrone;
+			productReference = 18076B8823D7F7E3003E2ACD /* MAFDrone.app */;
+			productType = "com.apple.product-type.application";
+		};
+		18076BA223D7F7E7003E2ACD /* MAFDroneTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18076BBA23D7F7E7003E2ACD /* Build configuration list for PBXNativeTarget "MAFDroneTests" */;
+			buildPhases = (
+				18076B9F23D7F7E7003E2ACD /* Sources */,
+				18076BA023D7F7E7003E2ACD /* Frameworks */,
+				18076BA123D7F7E7003E2ACD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18076BA523D7F7E7003E2ACD /* PBXTargetDependency */,
+			);
+			name = MAFDroneTests;
+			productName = MAFDroneTests;
+			productReference = 18076BA323D7F7E7003E2ACD /* MAFDroneTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		18076BAD23D7F7E7003E2ACD /* MAFDroneUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18076BBD23D7F7E7003E2ACD /* Build configuration list for PBXNativeTarget "MAFDroneUITests" */;
+			buildPhases = (
+				18076BAA23D7F7E7003E2ACD /* Sources */,
+				18076BAB23D7F7E7003E2ACD /* Frameworks */,
+				18076BAC23D7F7E7003E2ACD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18076BB023D7F7E7003E2ACD /* PBXTargetDependency */,
+			);
+			name = MAFDroneUITests;
+			productName = MAFDroneUITests;
+			productReference = 18076BAE23D7F7E7003E2ACD /* MAFDroneUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18076B8023D7F7E3003E2ACD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = CBU;
+				TargetAttributes = {
+					18076B8723D7F7E3003E2ACD = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					18076BA223D7F7E7003E2ACD = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 18076B8723D7F7E3003E2ACD;
+					};
+					18076BAD23D7F7E7003E2ACD = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 18076B8723D7F7E3003E2ACD;
+					};
+				};
+			};
+			buildConfigurationList = 18076B8323D7F7E3003E2ACD /* Build configuration list for PBXProject "MAFDrone" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 18076B7F23D7F7E3003E2ACD;
+			productRefGroup = 18076B8923D7F7E3003E2ACD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18076B8723D7F7E3003E2ACD /* MAFDrone */,
+				18076BA223D7F7E7003E2ACD /* MAFDroneTests */,
+				18076BAD23D7F7E7003E2ACD /* MAFDroneUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18076B8623D7F7E3003E2ACD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18076B9B23D7F7E6003E2ACD /* LaunchScreen.storyboard in Resources */,
+				184ADB4023D81C1000FCB477 /* DJIWaypointConfigViewController.xib in Resources */,
+				18076B9823D7F7E6003E2ACD /* Assets.xcassets in Resources */,
+				184ADB3B23D81A1200FCB477 /* DJIGSButtonViewController.xib in Resources */,
+				18076B9623D7F7E3003E2ACD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18076BA123D7F7E7003E2ACD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18076BAC23D7F7E7003E2ACD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		354566591C971FE7531FD01C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MAFDrone/Pods-MAFDrone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MAFDrone/Pods-MAFDrone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MAFDrone/Pods-MAFDrone-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EBFC908BDBEF35CFA9D95DBD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MAFDrone-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18076B8423D7F7E3003E2ACD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				184ADB3E23D81BC900FCB477 /* DJIWaypointConfigViewController.m in Sources */,
+				184ADB4423D81CCC00FCB477 /* DemoUtility.m in Sources */,
+				184ADB3323D818CD00FCB477 /* DJIAircraftAnnotation.m in Sources */,
+				184ADB2F23D816C200FCB477 /* DJIMapController.m in Sources */,
+				184ADB3923D819C000FCB477 /* DJIGSButtonViewController.m in Sources */,
+				184ADB3623D8195A00FCB477 /* DJIAircraftAnnotationView.m in Sources */,
+				184ADB2C23D811FF00FCB477 /* DJIRootViewController.m in Sources */,
+				18076B8D23D7F7E3003E2ACD /* AppDelegate.m in Sources */,
+				18076B9E23D7F7E6003E2ACD /* main.m in Sources */,
+				18076B9023D7F7E3003E2ACD /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18076B9F23D7F7E7003E2ACD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18076BA823D7F7E7003E2ACD /* MAFDroneTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18076BAA23D7F7E7003E2ACD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18076BB323D7F7E7003E2ACD /* MAFDroneUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		18076BA523D7F7E7003E2ACD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 18076B8723D7F7E3003E2ACD /* MAFDrone */;
+			targetProxy = 18076BA423D7F7E7003E2ACD /* PBXContainerItemProxy */;
+		};
+		18076BB023D7F7E7003E2ACD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 18076B8723D7F7E3003E2ACD /* MAFDrone */;
+			targetProxy = 18076BAF23D7F7E7003E2ACD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		18076B9423D7F7E3003E2ACD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18076B9523D7F7E3003E2ACD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		18076B9923D7F7E6003E2ACD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18076B9A23D7F7E6003E2ACD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		18076BB523D7F7E7003E2ACD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		18076BB623D7F7E7003E2ACD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		18076BB823D7F7E7003E2ACD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 411F131DDF35C307DE63DB00 /* Pods-MAFDrone.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QZTK5Y6DY6;
+				ENABLE_BITCODE = NO;
+				HEADER_SEARCH_PATHS = "$(PODS_ROOT)/Headers/Public";
+				INFOPLIST_FILE = MAFDrone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.dji.MAFDrone;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		18076BB923D7F7E7003E2ACD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAE53B36EA413D9540F580F0 /* Pods-MAFDrone.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QZTK5Y6DY6;
+				ENABLE_BITCODE = NO;
+				HEADER_SEARCH_PATHS = "$(PODS_ROOT)/Headers/Public";
+				INFOPLIST_FILE = MAFDrone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.dji.MAFDrone;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		18076BBB23D7F7E7003E2ACD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MAFDroneTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mafdrone.MAFDroneTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MAFDrone.app/MAFDrone";
+			};
+			name = Debug;
+		};
+		18076BBC23D7F7E7003E2ACD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MAFDroneTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.mafdrone.MAFDroneTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MAFDrone.app/MAFDrone";
+			};
+			name = Release;
+		};
+		18076BBE23D7F7E7003E2ACD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MAFDroneUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.dji.mafdroneconnection;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MAFDrone;
+			};
+			name = Debug;
+		};
+		18076BBF23D7F7E7003E2ACD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MAFDroneUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.dji.mafdroneconnection;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MAFDrone;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18076B8323D7F7E3003E2ACD /* Build configuration list for PBXProject "MAFDrone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18076BB523D7F7E7003E2ACD /* Debug */,
+				18076BB623D7F7E7003E2ACD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18076BB723D7F7E7003E2ACD /* Build configuration list for PBXNativeTarget "MAFDrone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18076BB823D7F7E7003E2ACD /* Debug */,
+				18076BB923D7F7E7003E2ACD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18076BBA23D7F7E7003E2ACD /* Build configuration list for PBXNativeTarget "MAFDroneTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18076BBB23D7F7E7003E2ACD /* Debug */,
+				18076BBC23D7F7E7003E2ACD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18076BBD23D7F7E7003E2ACD /* Build configuration list for PBXNativeTarget "MAFDroneUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18076BBE23D7F7E7003E2ACD /* Debug */,
+				18076BBF23D7F7E7003E2ACD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 18076B8023D7F7E3003E2ACD /* Project object */;
+}
