@@ -20,6 +20,9 @@
 {
     
     _mode = mode;
+    //Added what mode the load and save button appear in (right now in "edit" mode)
+    [_loadBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
+    [_saveBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
     [_editBtn setHidden:(mode == DJIGSViewMode_EditMode)];
     [_focusMapBtn setHidden:(mode == DJIGSViewMode_EditMode)];
     [_backBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
@@ -31,6 +34,22 @@
 }
 
 #pragma mark - IBAction Methods
+
+
+//Added method definitions for load and save buttons
+- (IBAction)loadBtnAction:(id)sender {
+    [self setMode:DJIGSViewMode_ViewMode];
+    if ([_delegate respondsToSelector:@selector(loadBtnActionInGSButtonVC:)]) {
+        
+    }
+}
+
+- (IBAction)saveBtnAction:(id)sender {
+    [self setMode:DJIGSViewMode_ViewMode];
+    if ([_delegate respondsToSelector:@selector(saveBtnActionInGSButtonVC:)]) {
+        
+    }
+}
 
 - (IBAction)backBtnAction:(id)sender {
     [self setMode:DJIGSViewMode_ViewMode];

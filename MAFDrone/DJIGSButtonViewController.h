@@ -15,6 +15,9 @@ typedef NS_ENUM(NSUInteger, DJIGSViewMode) {
 - (void)startBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC;
 - (void)addBtn:(UIButton *)button withActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC;
 - (void)configBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC;
+//Added save and load buttons
+- (void)loadBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC;
+- (void)saveBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC;
 - (void)switchToMode:(DJIGSViewMode)mode inGSButtonVC:(DJIGSButtonViewController *)GSBtnVC;
 
 @end
@@ -29,6 +32,9 @@ typedef NS_ENUM(NSUInteger, DJIGSViewMode) {
 @property (weak, nonatomic) IBOutlet UIButton *startBtn;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
 @property (weak, nonatomic) IBOutlet UIButton *configBtn;
+//Added save and load buttons
+@property (weak, nonatomic) IBOutlet UIButton *loadBtn;
+@property (weak, nonatomic) IBOutlet UIButton *saveBtn;
 
 @property (assign, nonatomic) DJIGSViewMode mode;
 @property (weak, nonatomic) id <DJIGSButtonViewControllerDelegate> delegate;
@@ -41,5 +47,9 @@ typedef NS_ENUM(NSUInteger, DJIGSViewMode) {
 - (IBAction)startBtnAction:(id)sender;
 - (IBAction)addBtnAction:(id)sender;
 - (IBAction)configBtnAction:(id)sender;
+//Added sender for load and save buttons
+- (IBAction)loadBtnAction:(id)sender;
+- (IBAction)saveBtnAction:(id)sender;
+
 
 @end
