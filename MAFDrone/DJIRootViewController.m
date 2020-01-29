@@ -284,61 +284,59 @@
 
 //___________________________________________________________________________//
 NSMutableArray * newWaypointsArray = nil;
--(void)saveArray {
-    //Archive data
-    if (!newWaypointsArray || !newWaypointsArray.count) {
-        newWaypointsArray = [[NSMutableArray alloc] init];
-        [newWaypointsArray addObject:@"NewArray"];
-    }
-        [newWaypointsArray addObject:@"Added!"];
+-(void)saveMission {
+    //New line is created with string to append
+    NSArray* wayPoints = self.mapController.wayPoints;
+    NSMutableString *content = [NSMutableString string];
     
-    //Search for directory containing waypoints.dat
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [ [paths objectAtIndex:0] stringByAppendingPathComponent:@"waypoints.txt"];
-    
-    //Append newWaypointsArray to waypoints.dat
-    NSError* error = nil;
-    NSString* contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
-    contents = [contents stringByAppendingString:@"Hi"];
-    [contents writeToFile:path atomically:YES encoding: NSUnicodeStringEncoding error:&error];
-    if(error) { // If error object was instantiated, handle it.
-        NSLog(@"ERROR while loading from file: %@", error);
-        [self ShowMessage:@"" message:@"Cannot append to file" actionTitle:@"OK"];
-        return;
+    for (int i = 0; i < wayPoints.count; i++) {
+        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@", wayPoints[i], @",\n"]];
     }
     
-    
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:newWaypointsArray];
-    [data writeToFile:path options:NSDataWritingAtomic error:nil];
-    
-    //Return
-    return;
+    [content appendFormat:@"%@", [NSString stringWithFormat: @"%@", @";\n"]];
+
+    //Get the documents directory:
+    NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *fileName = [documentsDirectory stringByAppendingPathComponent:@"waypoints.txt"];
+
+    //Append the string to the file, if no file then create it
+    NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:fileName];
+    if (fileHandle){
+        [fileHandle seekToEndOfFile];
+        [fileHandle writeData:[content dataUsingEncoding:NSUTF8StringEncoding]];
+        [fileHandle closeFile];
+    }
+    else{
+        [content writeToFile:fileName atomically:NO encoding:NSStringEncodingConversionAllowLossy error:nil];
+    }
+    [self ShowMessage:@"" message:@"Mission saved" actionTitle:@"OK"];
 }
 
--(NSString *)loadArray {
+-(void)loadMissions {
+    NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *fileName = [documentsDirectory stringByAppendingPathComponent:@"waypoints.txt"];
     
-    //Search for directory containing waypoints.dat
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [ [paths objectAtIndex:0] stringByAppendingPathComponent:@"waypoints.txt"];
+    NSString *waypointsText = [NSString stringWithContentsOfFile:fileName];
+
+    NSArray *archivedWaypointsArray = [waypointsText componentsSeparatedByString:@";\n"];
+
+    NSMutableString *archivedWaypointsText = [NSMutableString string];
     
-    //Write data in waypoints.dat to a new array
-    NSMutableArray *archivedWaypointsArray = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+    for (int i = 0; i < archivedWaypointsArray.count-1; i++) {
+        if (archivedWaypointsArray[i] != 0) {
+            [archivedWaypointsText appendFormat:@" %@", [NSString stringWithFormat: @"%s%d%s%@", "\n", i+1, ": ", archivedWaypointsArray[i]]];
+        }
+    }
     
-    //Convert archivedWaypointsArray to string
-    NSString * savedWaypointsAsString = [[archivedWaypointsArray valueForKey:@"description"] componentsJoinedByString:@""];
-    
-    //Return string of saved waypoints
-    return savedWaypointsAsString;
+    [self ShowMessage:@"" message:archivedWaypointsText actionTitle:@"OK"];
 }
 
 -(void)loadBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC {
-    NSString *savedWaypointsAsString = [self loadArray];
-    [self ShowMessage:@"" message:savedWaypointsAsString actionTitle:@"OK"];
+    [self loadMissions];
 }
 
 -(void)saveBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC {
-    [self saveArray];
-    [self ShowMessage:@"" message:@"Mission saved" actionTitle:@"OK"];
+    [self saveMission];
 }
 //________________________________________________________________________//
 
@@ -376,6 +374,10 @@ NSMutableArray * newWaypointsArray = nil;
         [self ShowMessage:@"No or not enough waypoints for mission" message:@"" actionTitle:@"OK"];
         return;
     }
+    if (wayPoints.count > 2) {
+        [self ShowMessage:@"Too many waypoints" message:@"" actionTitle:@"OK"];
+        return;
+    }
     
     [UIView animateWithDuration:0.25 animations:^{
         WeakReturn(weakSelf);
@@ -389,6 +391,7 @@ NSMutableArray * newWaypointsArray = nil;
         self.waypointMission = [[DJIMutableWaypointMission alloc] init];
     }
     
+    //USE THIS FOR LOADING MISSIONS____________________________________________________///////
     for (int i = 0; i < wayPoints.count; i++) {
         CLLocation* location = [wayPoints objectAtIndex:i];
         if (CLLocationCoordinate2DIsValid(location.coordinate)) {
