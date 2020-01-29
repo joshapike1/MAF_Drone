@@ -290,11 +290,10 @@ NSMutableArray * newWaypointsArray = nil;
     NSMutableString *content = [NSMutableString string];
     
     for (int i = 0; i < wayPoints.count; i++) {
-        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@", wayPoints[i], @",\n"]];
+        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@", wayPoints[i], @"||"]];
     }
     
     [content appendFormat:@"%@", [NSString stringWithFormat: @"%@", @";\n"]];
-
     //Get the documents directory:
     NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     NSString *fileName = [documentsDirectory stringByAppendingPathComponent:@"waypoints.txt"];
