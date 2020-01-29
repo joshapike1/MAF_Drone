@@ -40,14 +40,14 @@
 - (IBAction)loadBtnAction:(id)sender {
     [self setMode:DJIGSViewMode_ViewMode];
     if ([_delegate respondsToSelector:@selector(loadBtnActionInGSButtonVC:)]) {
-        
+        [_delegate loadBtnActionInGSButtonVC:self];
     }
 }
 
 - (IBAction)saveBtnAction:(id)sender {
     [self setMode:DJIGSViewMode_ViewMode];
     if ([_delegate respondsToSelector:@selector(saveBtnActionInGSButtonVC:)]) {
-        
+        [_delegate saveBtnActionInGSButtonVC:self];
     }
 }
 

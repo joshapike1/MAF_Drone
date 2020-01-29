@@ -53,6 +53,7 @@
     
     [self initUI];
     [self initData];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -281,15 +282,75 @@
 
 #pragma mark - DJIGSButtonViewController Delegate Methods
 
+//___________________________________________________________________________//
+NSMutableArray * newWaypointsArray = nil;
+-(void)saveArray {
+    //Archive data
+    if (!newWaypointsArray || !newWaypointsArray.count) {
+        newWaypointsArray = [[NSMutableArray alloc] init];
+        [newWaypointsArray addObject:@"NewArray"];
+    }
+        [newWaypointsArray addObject:@"Added!"];
+    
+    //Search for directory containing waypoints.dat
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [ [paths objectAtIndex:0] stringByAppendingPathComponent:@"waypoints.txt"];
+    
+    //Append newWaypointsArray to waypoints.dat
+    NSError* error = nil;
+    NSString* contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
+    contents = [contents stringByAppendingString:@"Hi"];
+    [contents writeToFile:path atomically:YES encoding: NSUnicodeStringEncoding error:&error];
+    if(error) { // If error object was instantiated, handle it.
+        NSLog(@"ERROR while loading from file: %@", error);
+        [self ShowMessage:@"" message:@"Cannot append to file" actionTitle:@"OK"];
+        return;
+    }
+    
+    
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:newWaypointsArray];
+    [data writeToFile:path options:NSDataWritingAtomic error:nil];
+    
+    //Return
+    return;
+}
+
+-(NSString *)loadArray {
+    
+    //Search for directory containing waypoints.dat
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [ [paths objectAtIndex:0] stringByAppendingPathComponent:@"waypoints.txt"];
+    
+    //Write data in waypoints.dat to a new array
+    NSMutableArray *archivedWaypointsArray = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+    
+    //Convert archivedWaypointsArray to string
+    NSString * savedWaypointsAsString = [[archivedWaypointsArray valueForKey:@"description"] componentsJoinedByString:@""];
+    
+    //Return string of saved waypoints
+    return savedWaypointsAsString;
+}
+
+-(void)loadBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC {
+    NSString *savedWaypointsAsString = [self loadArray];
+    [self ShowMessage:@"" message:savedWaypointsAsString actionTitle:@"OK"];
+}
+
+-(void)saveBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC {
+    [self saveArray];
+    [self ShowMessage:@"" message:@"Mission saved" actionTitle:@"OK"];
+}
+//________________________________________________________________________//
+
+
 - (void)stopBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
 {
     [[self missionOperator] stopMissionWithCompletion:^(NSError * _Nullable error) {
         if (error){
-            NSString* failedMessage = [NSString stringWithFormat:@"Stop Mission Failed: %@", error.description];
-            [self ShowMessage:@"" message:failedMessage actionTitle:@"OK"];
+            [self ShowMessage:@"" message:@"Mission cannot be stopped" actionTitle:@"OK"];
         }else
         {
-            [self ShowMessage:@"" message:@"Stop Mission Finished" actionTitle:@"OK"];
+            [self ShowMessage:@"" message:@"Mission stopped" actionTitle:@"OK"];
         }
 
     }];
