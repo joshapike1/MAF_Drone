@@ -283,7 +283,6 @@
 #pragma mark - DJIGSButtonViewController Delegate Methods
 
 //___________________________________________________________________________//
-NSMutableArray * newWaypointsArray = nil;
 -(void)saveMission {
     //New line is created with string to append
     NSArray* wayPoints = self.mapController.wayPoints;
@@ -325,7 +324,12 @@ NSMutableArray * newWaypointsArray = nil;
         if (archivedWaypointsArray[i] != 0) {
             [archivedWaypointsText appendFormat:@" %@", [NSString stringWithFormat: @"%s%d%s%@", "\n", i+1, ": ", archivedWaypointsArray[i]]];
         }
-    }
+        
+        // Adding waypoints to map
+        // Send to Andrews function IMPORTANT: Coordinates are doubles: CLLocationCoordinate2D
+        
+}
+        
     
     [self ShowMessage:@"" message:archivedWaypointsText actionTitle:@"OK"];
 }
