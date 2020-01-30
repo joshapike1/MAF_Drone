@@ -19,13 +19,14 @@
 
 - (void)addPoint:(CGPoint)point withMapView:(MKMapView *)mapView
 {
-    
-    CLLocationCoordinate2D coordinate = [mapView convertPoint:point toCoordinateFromView:mapView];
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-    [_editPoints addObject:location];
-    MKPointAnnotation* annotation = [[MKPointAnnotation alloc] init];
-    annotation.coordinate = location.coordinate;
-    [mapView addAnnotation:annotation];
+   if (_editPoints.count < 2) {    //maximum limit
+        CLLocationCoordinate2D coordinate = [mapView convertPoint:point toCoordinateFromView:mapView];
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+        [_editPoints addObject:location];
+        MKPointAnnotation* annotation = [[MKPointAnnotation alloc] init];
+        annotation.coordinate = location.coordinate;
+        [mapView addAnnotation:annotation];
+    }
 
 }
 
