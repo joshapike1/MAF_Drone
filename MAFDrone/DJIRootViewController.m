@@ -245,11 +245,14 @@
     
     for (int i = 0; i < self.waypointMission.waypointCount; i++) {
         DJIWaypoint* waypoint = [self.waypointMission waypointAtIndex:i];
-        waypoint.altitude = [self.waypointConfigVC.altitudeTextField.text floatValue];
+        
+        ///<-------------------NEEDS TO BE CALCULATED--------------------------->
+        waypoint.altitude = 10; //Set altitude to 10m
     }
     
-    self.waypointMission.maxFlightSpeed = [self.waypointConfigVC.maxFlightSpeedTextField.text floatValue];
-    self.waypointMission.autoFlightSpeed = [self.waypointConfigVC.autoFlightSpeedTextField.text floatValue];
+    self.waypointMission.maxFlightSpeed = 10; //Set max speeed to 10m/s
+    self.waypointMission.autoFlightSpeed = 5; //Set auto flight speed to 5m/s
+    
     self.waypointMission.headingMode = (DJIWaypointMissionHeadingMode)self.waypointConfigVC.headingSegmentedControl.selectedSegmentIndex;
     [self.waypointMission setFinishedAction:(DJIWaypointMissionFinishedAction)self.waypointConfigVC.actionSegmentedControl.selectedSegmentIndex];
 

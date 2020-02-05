@@ -21,9 +21,9 @@
 
 - (void)initUI
 {
-    self.altitudeTextField.text = @"20"; //Set the altitude to 20
-    self.autoFlightSpeedTextField.text = @"8"; //Set the autoFlightSpeed to 8
-    self.maxFlightSpeedTextField.text = @"10"; //Set the maxFlightSpeed to 10
+    self.nameTextField.text = @""; //Set the name to ""
+    self.resolutionTextField.text = @"4"; //Set the resolution to 4
+    self.widthTextField.text = @"15"; //Set the width to 15 meters
     [self.actionSegmentedControl setSelectedSegmentIndex:1]; //Set the finishAction to DJIWaypointMissionFinishedGoHome
     [self.headingSegmentedControl setSelectedSegmentIndex:0]; //Set the headingMode to DJIWaypointMissionHeadingAuto
     
