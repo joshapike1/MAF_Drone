@@ -141,7 +141,6 @@
 				184ADB3423D8194D00FCB477 /* DJIAircraftAnnotationView.h */,
 				184ADB3523D8195A00FCB477 /* DJIAircraftAnnotationView.m */,
 				184ADB3723D819B300FCB477 /* DJIGSButtonViewController.h */,
-				184ADB4123D81C9600FCB477 /* GSDemo */,
 				184ADB3823D819C000FCB477 /* DJIGSButtonViewController.m */,
 				184ADB3A23D81A1200FCB477 /* DJIGSButtonViewController.xib */,
 				184ADB3023D816D800FCB477 /* DJIMapController.h */,
@@ -159,6 +158,7 @@
 				18076B9923D7F7E6003E2ACD /* LaunchScreen.storyboard */,
 				18076B9C23D7F7E6003E2ACD /* Info.plist */,
 				18076B9D23D7F7E6003E2ACD /* main.m */,
+				184ADB4123D81C9600FCB477 /* GSDemo */,
 			);
 			path = MAFDrone;
 			sourceTree = "<group>";

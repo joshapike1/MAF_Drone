@@ -4,7 +4,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self setMode:DJIGSViewMode_ViewMode];
     
 }
@@ -20,51 +20,21 @@
 {
     
     _mode = mode;
-    //Added what mode the load and save button appear in (right now in "edit" mode)
-    [_loadBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
-    [_saveBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
-    [_editBtn setHidden:(mode == DJIGSViewMode_EditMode)];
     [_focusMapBtn setHidden:(mode == DJIGSViewMode_EditMode)];
-    [_backBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
-    [_clearBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
-    [_startBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
-    [_stopBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
-    [_addBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
-    [_configBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
+    [_clearBtn setHidden:(mode == DJIGSViewMode_EditMode)];
+    ///<--------Not needed right now-------->
+    //    [_loadBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
+    //    [_saveBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
+    //    [_editBtn setHidden:(mode == DJIGSViewMode_EditMode)];
+    //    [_backBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
+    //    [_startBtn setHidden:(mode == DJIGSViewMode_PreFlyMode)];
+    //    [_stopBtn setHidden:(mode == DJIGSViewMode_FlyMode)];
+    
+    [_addBtn setHidden:(mode == DJIGSViewMode_EditMode)];
+    [_saveBtn setHidden:(mode == DJIGSViewMode_EditMode)];
 }
 
 #pragma mark - IBAction Methods
-
-
-//Added method definitions for load and save buttons
-- (IBAction)loadBtnAction:(id)sender {
-    [self setMode:DJIGSViewMode_ViewMode];
-    if ([_delegate respondsToSelector:@selector(loadBtnActionInGSButtonVC:)]) {
-        [_delegate loadBtnActionInGSButtonVC:self];
-    }
-}
-
-- (IBAction)saveBtnAction:(id)sender {
-    [self setMode:DJIGSViewMode_ViewMode];
-    if ([_delegate respondsToSelector:@selector(saveBtnActionInGSButtonVC:)]) {
-        [_delegate saveBtnActionInGSButtonVC:self];
-    }
-}
-
-- (IBAction)backBtnAction:(id)sender {
-    [self setMode:DJIGSViewMode_ViewMode];
-    if ([_delegate respondsToSelector:@selector(switchToMode:inGSButtonVC:)]) {
-        [_delegate switchToMode:self.mode inGSButtonVC:self];
-    }
-}
-
-- (IBAction)stopBtnAction:(id)sender {
- 
-    if ([_delegate respondsToSelector:@selector(stopBtnActionInGSButtonVC:)]) {
-        [_delegate stopBtnActionInGSButtonVC:self];
-    }
-    
-}
 
 - (IBAction)clearBtnAction:(id)sender {
     
@@ -81,22 +51,6 @@
     }
 }
 
-- (IBAction)editBtnAction:(id)sender {
-    
-    [self setMode:DJIGSViewMode_EditMode];
-    if ([_delegate respondsToSelector:@selector(switchToMode:inGSButtonVC:)]) {
-        [_delegate switchToMode:self.mode inGSButtonVC:self];
-    }
-    
-}
-
-- (IBAction)startBtnAction:(id)sender {
-    
-    if ([_delegate respondsToSelector:@selector(startBtnActionInGSButtonVC:)]) {
-        [_delegate startBtnActionInGSButtonVC:self];
-    }
-}
-
 - (IBAction)addBtnAction:(id)sender {
     
     if ([_delegate respondsToSelector:@selector(addBtn:withActionInGSButtonVC:)]) {
@@ -105,11 +59,62 @@
     
 }
 
-- (IBAction)configBtnAction:(id)sender {
+// New save button
+- (IBAction)saveBtnAction:(id)sender {
     
-    if ([_delegate respondsToSelector:@selector(configBtnActionInGSButtonVC:)]) {
-        [_delegate configBtnActionInGSButtonVC:self];
+    if ([_delegate respondsToSelector:@selector(saveBtnActionInGSButtonVC:)]) {
+        [_delegate saveBtnActionInGSButtonVC:self];
     }
 }
+
+///<------Not needed right now------>
+//- (IBAction)editBtnAction:(id)sender {
+//
+//    [self setMode:DJIGSViewMode_EditMode];
+//    if ([_delegate respondsToSelector:@selector(switchToMode:inGSButtonVC:)]) {
+//        [_delegate switchToMode:self.mode inGSButtonVC:self];
+//    }
+//
+//}
+
+//Not needed here
+//- (IBAction)startBtnAction:(id)sender {
+//
+//    if ([_delegate respondsToSelector:@selector(startBtnActionInGSButtonVC:)]) {
+//        [_delegate startBtnActionInGSButtonVC:self];
+//    }
+//}
+
+//Added method definitions for load and save buttons
+//- (IBAction)loadBtnAction:(id)sender {
+//    [self setMode:DJIGSViewMode_ViewMode];
+//    if ([_delegate respondsToSelector:@selector(loadBtnActionInGSButtonVC:)]) {
+//        [_delegate loadBtnActionInGSButtonVC:self];
+//    }
+//}
+
+//Old save button
+//- (IBAction)saveBtnAction:(id)sender {
+//    [self setMode:DJIGSViewMode_ViewMode];
+//    if ([_delegate respondsToSelector:@selector(saveBtnActionInGSButtonVC:)]) {
+//        [_delegate saveBtnActionInGSButtonVC:self];
+//    }
+//}
+
+//- (IBAction)backBtnAction:(id)sender {
+//    [self setMode:DJIGSViewMode_ViewMode];
+//    if ([_delegate respondsToSelector:@selector(switchToMode:inGSButtonVC:)]) {
+//        [_delegate switchToMode:self.mode inGSButtonVC:self];
+//    }
+//}
+
+// Not needed here
+//- (IBAction)stopBtnAction:(id)sender {
+//
+//    if ([_delegate respondsToSelector:@selector(stopBtnActionInGSButtonVC:)]) {
+//        [_delegate stopBtnActionInGSButtonVC:self];
+//    }
+//
+//}
 
 @end

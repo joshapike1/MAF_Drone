@@ -9,7 +9,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self initUI];
     
 }
@@ -31,7 +31,7 @@
 
 
 - (IBAction)cancelBtnAction:(id)sender {
- 
+    
     if ([_delegate respondsToSelector:@selector(cancelBtnActionInDJIWaypointConfigViewController:)]) {
         [_delegate cancelBtnActionInDJIWaypointConfigViewController:self];
     }

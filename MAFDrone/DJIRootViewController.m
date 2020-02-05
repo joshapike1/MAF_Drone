@@ -48,7 +48,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self registerApp];
     
     [self initUI];
@@ -99,7 +99,7 @@
     {
         self.waypointConfigVC.view.center = self.view.center;
     }
-
+    
     self.waypointConfigVC.delegate = self;
     [self.view addSubview:self.waypointConfigVC.view];
 }
@@ -114,7 +114,7 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:target cancelButtonTitle:cancleBtnTitle otherButtonTitles:nil];
-        [alert show];*/
+         [alert show];*/
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
         
@@ -152,7 +152,7 @@
             flightController.delegate = self;
         }
     }else{
-    [self ShowMessage:@"Product disconnected" message:nil actionTitle: @"OK"];
+        [self ShowMessage:@"Product disconnected" message:nil actionTitle: @"OK"];
     }
     
     //If this demo is used in China, it's required to login to your DJI account to activate the application. Also you need to use DJI Go app to bind the aircraft to your DJI account. For more details, please check this demo's tutorial.
@@ -208,7 +208,7 @@
     CGPoint point = [tapGesture locationInView:self.mapView];
     
     if(tapGesture.state == UIGestureRecognizerStateEnded){
-         if (self.isEditingPoints)
+        if (self.isEditingPoints)
             [self.mapController addPoint:point withMapView:self.mapView];
     }
 }
@@ -250,6 +250,7 @@
     
     for (int i = 0; i < self.waypointMission.waypointCount; i++) {
         DJIWaypoint* waypoint = [self.waypointMission waypointAtIndex:i];
+        
         ///<-------------------NEEDS TO BE CALCULATED--------------------------->
         waypoint.altitude = 10; //Set altitude to 10m
     }
@@ -259,38 +260,34 @@
     
     self.waypointMission.headingMode = (DJIWaypointMissionHeadingMode)self.waypointConfigVC.headingSegmentedControl.selectedSegmentIndex;
     [self.waypointMission setFinishedAction:(DJIWaypointMissionFinishedAction)self.waypointConfigVC.actionSegmentedControl.selectedSegmentIndex];
-
-    [[self missionOperator] loadMission:self.waypointMission];
     
-    WeakRef(target);
+    ///<--------------------------Not Needed for saving mission which is what thsi method does, will need for loading missions to drone----------------------------->
+    //    [[self missionOperator] loadMission:self.waypointMission];
+    //
+    //    WeakRef(target);
+    //
+    //    [[self missionOperator] addListenerToFinished:self withQueue:dispatch_get_main_queue() andBlock:^(NSError * _Nullable error) {
+    //
+    //        WeakReturn(target);
+    //
+    //        if (error) {
+    //            [target showAlertViewWithTitle:@"Mission Execution Failed" withMessage:[NSString stringWithFormat:@"%@", error.description]];
+    //        }
+    //        else {
+    //            [target showAlertViewWithTitle:@"Mission Execution Finished" withMessage:nil];
+    //        }
+    //    }];
+    //
+    //    [[self missionOperator] uploadMissionWithCompletion:^(NSError * _Nullable error) {
+    //        if (error){
+    //            NSString* uploadError = [NSString stringWithFormat:@"Upload Mission failed:%@", error.description];
+    //            [self ShowMessage:@"" message:uploadError actionTitle:@"OK"];
+    //        }else {
+    //            [self ShowMessage:@"" message:@"Upload Mission Finished" actionTitle:@"OK"];
+    //        }
+    //    }];
     
-    [[self missionOperator] addListenerToFinished:self withQueue:dispatch_get_main_queue() andBlock:^(NSError * _Nullable error) {
-        
-        WeakReturn(target);
-        
-        if (error) {
-            [target showAlertViewWithTitle:@"Mission Execution Failed" withMessage:[NSString stringWithFormat:@"%@", error.description]];
-        }
-        else {
-            [target showAlertViewWithTitle:@"Mission Execution Finished" withMessage:nil];
-        }
-    }];
-
-    [[self missionOperator] uploadMissionWithCompletion:^(NSError * _Nullable error) {
-        if (error){
-            NSString* uploadError = [NSString stringWithFormat:@"Upload Mission failed:%@", error.description];
-            [self ShowMessage:@"" message:uploadError actionTitle:@"OK"];
-        }else {
-            [self ShowMessage:@"" message:@"Upload Mission Finished" actionTitle:@"OK"];
-        }
-    }];
-    
-}
-
-#pragma mark - DJIGSButtonViewController Delegate Methods
-
-//___________________________________________________________________________//
--(void)saveMission {
+    ///<-----------Saving the waypoints to a text file-------------->
     //New line is created with string to append
     NSArray* wayPoints = self.mapController.wayPoints;
     NSMutableString *content = [NSMutableString string];
@@ -303,7 +300,7 @@
     //Get the documents directory:
     NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     NSString *fileName = [documentsDirectory stringByAppendingPathComponent:@"waypoints.txt"];
-
+    
     //Append the string to the file, if no file then create it
     NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:fileName];
     if (fileHandle){
@@ -314,56 +311,79 @@
     else{
         [content writeToFile:fileName atomically:NO encoding:NSStringEncodingConversionAllowLossy error:nil];
     }
-    [self ShowMessage:@"" message:@"Mission saved" actionTitle:@"OK"];
-}
-
--(void)loadMissions {
-    NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    NSString *fileName = [documentsDirectory stringByAppendingPathComponent:@"waypoints.txt"];
     
-    NSString *waypointsText = [NSString stringWithContentsOfFile:fileName];
-
-    NSArray *archivedWaypointsArray = [waypointsText componentsSeparatedByString:@";\n"];
-
-    NSMutableString *archivedWaypointsText = [NSMutableString string];
-    
-    for (int i = 0; i < archivedWaypointsArray.count-1; i++) {
-        if (archivedWaypointsArray[i] != 0) {
-            [archivedWaypointsText appendFormat:@" %@", [NSString stringWithFormat: @"%s%d%s%@", "\n", i+1, ": ", archivedWaypointsArray[i]]];
-        }
-        
-        // Adding waypoints to map
-        // Send to Andrews function IMPORTANT: Coordinates are doubles: CLLocationCoordinate2D
-        
-}
-        
-    
-    [self ShowMessage:@"" message:archivedWaypointsText actionTitle:@"OK"];
+    //Switch storyboards
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"IntroController"];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
--(void)loadBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC {
-    [self loadMissions];
-}
+#pragma mark - DJIGSButtonViewController Delegate Methods
 
--(void)saveBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC {
-    [self saveMission];
-}
+///<------Old save and load buttons------>
+//-(void)loadMissions {
+//    NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+//    NSString *fileName = [documentsDirectory stringByAppendingPathComponent:@"waypoints.txt"];
+//
+//    NSString *waypointsText = [NSString stringWithContentsOfFile:fileName];
+//
+//    NSArray *archivedWaypointsArray = [waypointsText componentsSeparatedByString:@";\n"];
+//
+//    NSMutableString *archivedWaypointsText = [NSMutableString string];
+//
+//    for (int i = 0; i < archivedWaypointsArray.count-1; i++) {
+//        if (archivedWaypointsArray[i] != 0) {
+//            [archivedWaypointsText appendFormat:@" %@", [NSString stringWithFormat: @"%s%d%s%@", "\n", i+1, ": ", archivedWaypointsArray[i]]];
+//        }
+//
+//        // Adding waypoints to map
+//        // Send to Andrews function IMPORTANT: Coordinates are doubles: CLLocationCoordinate2D
+//
+//
+//
+//    }
+//
+//
+//    [self ShowMessage:@"" message:archivedWaypointsText actionTitle:@"OK"];
+//}
+
+//-(void)loadBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC {
+//    [self loadMissions];
+//}
+
+//Old save button
+//-(void)saveBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC {
+//    [self saveMission];
+//}
 //________________________________________________________________________//
 
+///<------Stop and start buttons not needed right now------>
+//- (void)stopBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
+//{
+//    [[self missionOperator] stopMissionWithCompletion:^(NSError * _Nullable error) {
+//        if (error){
+//            [self ShowMessage:@"" message:@"Mission cannot be stopped" actionTitle:@"OK"];
+//        }else
+//        {
+//            [self ShowMessage:@"" message:@"Mission stopped" actionTitle:@"OK"];
+//        }
+//
+//    }];
+//
+//}
 
-- (void)stopBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
-{
-    [[self missionOperator] stopMissionWithCompletion:^(NSError * _Nullable error) {
-        if (error){
-            [self ShowMessage:@"" message:@"Mission cannot be stopped" actionTitle:@"OK"];
-        }else
-        {
-            [self ShowMessage:@"" message:@"Mission stopped" actionTitle:@"OK"];
-        }
-
-    }];
-    
-}
+//- (void)startBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
+//{
+//    [[self missionOperator] startMissionWithCompletion:^(NSError * _Nullable error) {
+//        if (error){
+//            [self ShowMessage:@"Start Mission Failed" message:error.description actionTitle:@"OK"];
+//        }else
+//        {
+//            [self ShowMessage:@"" message:@"Mission Started" actionTitle:@"OK"];
+//        }
+//    }];
+//
+//}
 
 - (void)clearBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
 {
@@ -375,7 +395,7 @@
     [self focusMap];
 }
 
-- (void)configBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
+- (void)saveBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
 {
     WeakRef(weakSelf);
     
@@ -412,19 +432,6 @@
     
 }
 
-- (void)startBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
-{
-    [[self missionOperator] startMissionWithCompletion:^(NSError * _Nullable error) {
-        if (error){
-            [self ShowMessage:@"Start Mission Failed" message:error.description actionTitle:@"OK"];
-        }else
-        {
-            [self ShowMessage:@"" message:@"Mission Started" actionTitle:@"OK"];
-        }
-    }];
-    
-}
-
 - (void)switchToMode:(DJIGSViewMode)mode inGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
 {
     if (mode == DJIGSViewMode_EditMode) {
@@ -441,7 +448,7 @@
     }else
     {
         self.isEditingPoints = YES;
-        [button setTitle:@"Finished" forState:UIControlStateNormal];
+        [button setTitle:@"Done" forState:UIControlStateNormal];
     }
 }
 
