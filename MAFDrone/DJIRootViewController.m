@@ -243,11 +243,22 @@
         weakSelf.waypointConfigVC.view.alpha = 0;
     }];
     
+    if (self.waypointMission.waypointCount != 2) {
+        [self ShowMessage:@"" message:@"You must have exactly two waypoints to configure, on each end of the runway" actionTitle:@"OK"];
+        return;
+    }
+    
     for (int i = 0; i < self.waypointMission.waypointCount; i++) {
         DJIWaypoint* waypoint = [self.waypointMission waypointAtIndex:i];
+<<<<<<< HEAD
         
         ///<-------------------NEEDS TO BE CALCULATED--------------------------->
         waypoint.altitude = 10; //Set altitude to 10m
+=======
+        waypoint.altitude = [self.waypointConfigVC.altitudeTextField.text floatValue];
+        [waypoint addAction: [action initWithActionType:(DJIWaypointActionTypeShootPhoto) param:5]]; //Param is ignored for this type of mission
+
+>>>>>>> master
     }
     
     self.waypointMission.maxFlightSpeed = 10; //Set max speeed to 10m/s
