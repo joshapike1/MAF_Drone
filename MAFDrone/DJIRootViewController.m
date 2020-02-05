@@ -250,15 +250,8 @@
     
     for (int i = 0; i < self.waypointMission.waypointCount; i++) {
         DJIWaypoint* waypoint = [self.waypointMission waypointAtIndex:i];
-<<<<<<< HEAD
-        
         ///<-------------------NEEDS TO BE CALCULATED--------------------------->
         waypoint.altitude = 10; //Set altitude to 10m
-=======
-        waypoint.altitude = [self.waypointConfigVC.altitudeTextField.text floatValue];
-        [waypoint addAction: [action initWithActionType:(DJIWaypointActionTypeShootPhoto) param:5]]; //Param is ignored for this type of mission
-
->>>>>>> master
     }
     
     self.waypointMission.maxFlightSpeed = 10; //Set max speeed to 10m/s
