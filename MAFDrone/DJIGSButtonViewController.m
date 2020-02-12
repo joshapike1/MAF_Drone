@@ -22,6 +22,8 @@
     _mode = mode;
     [_focusMapBtn setHidden:(mode == DJIGSViewMode_EditMode)];
     [_clearBtn setHidden:(mode == DJIGSViewMode_EditMode)];
+    [_addBtn setHidden:(mode == DJIGSViewMode_EditMode)];
+    [_saveBtn setHidden:(mode == DJIGSViewMode_EditMode)];
     ///<--------Not needed right now-------->
     //    [_loadBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
     //    [_saveBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
@@ -29,9 +31,6 @@
     //    [_backBtn setHidden:(mode == DJIGSViewMode_ViewMode)];
     //    [_startBtn setHidden:(mode == DJIGSViewMode_PreFlyMode)];
     //    [_stopBtn setHidden:(mode == DJIGSViewMode_FlyMode)];
-    
-    [_addBtn setHidden:(mode == DJIGSViewMode_EditMode)];
-    [_saveBtn setHidden:(mode == DJIGSViewMode_EditMode)];
 }
 
 #pragma mark - IBAction Methods

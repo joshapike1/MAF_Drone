@@ -66,6 +66,7 @@
 }
 
 #pragma mark Init Methods
+
 -(void)initData
 {
     self.userLocation = kCLLocationCoordinate2DInvalid;
@@ -113,8 +114,6 @@
 - (void) ShowMessage:(NSString*)title message:(NSString*) message actionTitle:(NSString*) cancleBtnTitle
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:target cancelButtonTitle:cancleBtnTitle otherButtonTitles:nil];
-         [alert show];*/
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
         
@@ -261,7 +260,7 @@
     self.waypointMission.headingMode = (DJIWaypointMissionHeadingMode)self.waypointConfigVC.headingSegmentedControl.selectedSegmentIndex;
     [self.waypointMission setFinishedAction:(DJIWaypointMissionFinishedAction)self.waypointConfigVC.actionSegmentedControl.selectedSegmentIndex];
     
-    ///<--------------------------Not Needed for saving mission which is what thsi method does, will need for loading missions to drone----------------------------->
+    ///<--------------------------Not Needed for saving mission which is what this method does, will need for loading missions to drone----------------------------->
     //    [[self missionOperator] loadMission:self.waypointMission];
     //
     //    WeakRef(target);
@@ -321,32 +320,7 @@
 #pragma mark - DJIGSButtonViewController Delegate Methods
 
 ///<------Old save and load buttons------>
-//-(void)loadMissions {
-//    NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-//    NSString *fileName = [documentsDirectory stringByAppendingPathComponent:@"waypoints.txt"];
 //
-//    NSString *waypointsText = [NSString stringWithContentsOfFile:fileName];
-//
-//    NSArray *archivedWaypointsArray = [waypointsText componentsSeparatedByString:@";\n"];
-//
-//    NSMutableString *archivedWaypointsText = [NSMutableString string];
-//
-//    for (int i = 0; i < archivedWaypointsArray.count-1; i++) {
-//        if (archivedWaypointsArray[i] != 0) {
-//            [archivedWaypointsText appendFormat:@" %@", [NSString stringWithFormat: @"%s%d%s%@", "\n", i+1, ": ", archivedWaypointsArray[i]]];
-//        }
-//
-//        // Adding waypoints to map
-//        // Send to Andrews function IMPORTANT: Coordinates are doubles: CLLocationCoordinate2D
-//
-//
-//
-//    }
-//
-//
-//    [self ShowMessage:@"" message:archivedWaypointsText actionTitle:@"OK"];
-//}
-
 //-(void)loadBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC {
 //    [self loadMissions];
 //}

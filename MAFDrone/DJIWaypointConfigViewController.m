@@ -40,6 +40,22 @@
 - (IBAction)finishBtnAction:(id)sender {
     
     if ([_delegate respondsToSelector:@selector(finishBtnActionInDJIWaypointConfigViewController:)]) {
+        NSMutableString *content = [NSMutableString string];
+        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@", self.nameTextField.text, @" "]];
+        //Get the documents directory:
+        NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+        NSString *fileName = [documentsDirectory stringByAppendingPathComponent:@"waypoints.txt"];
+        
+        //Append the string to the file, if no file then create it
+        NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:fileName];
+        if (fileHandle){
+            [fileHandle seekToEndOfFile];
+            [fileHandle writeData:[content dataUsingEncoding:NSUTF8StringEncoding]];
+            [fileHandle closeFile];
+        }
+        else{
+            [content writeToFile:fileName atomically:NO encoding:NSStringEncodingConversionAllowLossy error:nil];
+        }
         [_delegate finishBtnActionInDJIWaypointConfigViewController:self];
     }
     
