@@ -19,7 +19,6 @@ NSArray *archivedWaypointsArray;
     NSString *waypointsText = [NSString stringWithContentsOfFile:fileName];
 
     archivedWaypointsArray = [waypointsText componentsSeparatedByString:@";\n"];
-
         // Send to Andrews function IMPORTANT: Coordinates are doubles: CLLocationCoordinate2D
 }
 
@@ -36,6 +35,14 @@ NSArray *archivedWaypointsArray;
         [self presentViewController:alert animated:(YES) completion:nil];
         
     });
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //indexPath.row;
+    indexPath.row
+    [self ShowMessage:@"Registration Result" message:indexPath.row actionTitle:@"OK"];
+    
 }
 
 
@@ -57,8 +64,5 @@ NSArray *archivedWaypointsArray;
     cell.textLabel.text = [archivedWaypointsArray objectAtIndex:indexPath.row];
     return cell;
 }
-
-[self ShowMessage:@"Registration Result" message:registerResult actionTitle:@"OK"];
-
 
 @end
