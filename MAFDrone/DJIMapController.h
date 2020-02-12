@@ -12,6 +12,10 @@
  */
 - (void)addPoint:(CGPoint)point withMapView:(MKMapView *)mapView;
 
+
+//Add a waypoint by its gps coordinate
+- (void)addLocation:(CLLocationCoordinate2D)coord withMapView: (MKMapView*) mapView;
+
 /**
  *  Clean All Waypoints in Map View
  */
