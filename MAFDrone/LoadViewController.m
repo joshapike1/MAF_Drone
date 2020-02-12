@@ -23,7 +23,20 @@ NSArray *archivedWaypointsArray;
         // Send to Andrews function IMPORTANT: Coordinates are doubles: CLLocationCoordinate2D
 }
 
-
+- (void) ShowMessage:(NSString*)title message:(NSString*) message actionTitle:(NSString*) cancleBtnTitle
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *okButton = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        
+        [alert addAction:okButton];
+        [self presentViewController:alert animated:(YES) completion:nil];
+        
+    });
+}
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -44,6 +57,8 @@ NSArray *archivedWaypointsArray;
     cell.textLabel.text = [archivedWaypointsArray objectAtIndex:indexPath.row];
     return cell;
 }
+
+[self ShowMessage:@"Registration Result" message:registerResult actionTitle:@"OK"];
 
 
 @end
