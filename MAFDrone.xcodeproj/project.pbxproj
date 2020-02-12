@@ -25,6 +25,7 @@
 		184ADB4023D81C1000FCB477 /* DJIWaypointConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184ADB3F23D81C1000FCB477 /* DJIWaypointConfigViewController.xib */; };
 		184ADB4423D81CCC00FCB477 /* DemoUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 184ADB4323D81CCC00FCB477 /* DemoUtility.m */; };
 		185B288E23F3AFBC000AEAF3 /* LoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185B288D23F3AFBC000AEAF3 /* LoadViewController.m */; };
+		1FB71B9723F4BA9C003329A9 /* FlightPlanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB71B9523F4BA9C003329A9 /* FlightPlanner.m */; };
 		F8708C96598372E0312BAAD0 /* libPods-MAFDrone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F31ECEDA450D03DA2CF28B42 /* libPods-MAFDrone.a */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,8 @@
 		184ADB4523D81E0A00FCB477 /* GSDemo-pch.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GSDemo-pch.pch"; sourceTree = "<group>"; };
 		185B288C23F3AF99000AEAF3 /* LoadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoadViewController.h; sourceTree = "<group>"; };
 		185B288D23F3AFBC000AEAF3 /* LoadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoadViewController.m; sourceTree = "<group>"; };
+		1FB71B9523F4BA9C003329A9 /* FlightPlanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlightPlanner.m; sourceTree = "<group>"; };
+		1FB71B9623F4BA9C003329A9 /* FlightPlanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlightPlanner.h; sourceTree = "<group>"; };
 		411F131DDF35C307DE63DB00 /* Pods-MAFDrone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MAFDrone.debug.xcconfig"; path = "Target Support Files/Pods-MAFDrone/Pods-MAFDrone.debug.xcconfig"; sourceTree = "<group>"; };
 		AAE53B36EA413D9540F580F0 /* Pods-MAFDrone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MAFDrone.release.xcconfig"; path = "Target Support Files/Pods-MAFDrone/Pods-MAFDrone.release.xcconfig"; sourceTree = "<group>"; };
 		F31ECEDA450D03DA2CF28B42 /* libPods-MAFDrone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MAFDrone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +166,8 @@
 				18076B9923D7F7E6003E2ACD /* LaunchScreen.storyboard */,
 				18076B9C23D7F7E6003E2ACD /* Info.plist */,
 				18076B9D23D7F7E6003E2ACD /* main.m */,
+				1FB71B9623F4BA9C003329A9 /* FlightPlanner.h */,
+				1FB71B9523F4BA9C003329A9 /* FlightPlanner.m */,
 				184ADB4123D81C9600FCB477 /* GSDemo */,
 			);
 			path = MAFDrone;
@@ -392,6 +397,7 @@
 				184ADB4423D81CCC00FCB477 /* DemoUtility.m in Sources */,
 				184ADB3323D818CD00FCB477 /* DJIAircraftAnnotation.m in Sources */,
 				185B288E23F3AFBC000AEAF3 /* LoadViewController.m in Sources */,
+				1FB71B9723F4BA9C003329A9 /* FlightPlanner.m in Sources */,
 				184ADB2F23D816C200FCB477 /* DJIMapController.m in Sources */,
 				184ADB3923D819C000FCB477 /* DJIGSButtonViewController.m in Sources */,
 				184ADB3623D8195A00FCB477 /* DJIAircraftAnnotationView.m in Sources */,

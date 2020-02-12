@@ -30,6 +30,14 @@
 
 }
 
+- (void)addLocation:(CLLocationCoordinate2D)coordinate withMapView: (MKMapView*) mapView {
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+    [_editPoints addObject:location];
+    MKPointAnnotation* annotation = [[MKPointAnnotation alloc] init];
+    annotation.coordinate = location.coordinate;
+    [mapView addAnnotation:annotation];
+}
+
 - (void)cleanAllPointsWithMapView:(MKMapView *)mapView
 {
     [_editPoints removeAllObjects];
