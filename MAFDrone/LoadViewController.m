@@ -3,6 +3,7 @@
 @implementation LoadViewController 
 
 NSArray *archivedWaypointsArray;
+NSString *whatToLoad;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -11,6 +12,14 @@ NSArray *archivedWaypointsArray;
     [self loadMissions];
 }
 
+
+- (IBAction)loadBtnAction:(id)sender {
+    [self ShowMessage:@"Loading" message:whatToLoad actionTitle:@"OK"];
+}
+
+- (IBAction)detailsMapBtnAction:(id)sender {
+    [self ShowMessage:@"Details" message:whatToLoad actionTitle:@"OK"];
+}
 
 -(void)loadMissions {
     NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
@@ -39,9 +48,8 @@ NSArray *archivedWaypointsArray;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //indexPath.row;
-    indexPath.row
-    [self ShowMessage:@"Registration Result" message:indexPath.row actionTitle:@"OK"];
+    NSString *inStr = archivedWaypointsArray[indexPath.row];
+    whatToLoad = inStr;
     
 }
 

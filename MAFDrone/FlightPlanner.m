@@ -12,7 +12,6 @@
 
 @implementation FlightPlanner
 
-
 const double radius = 6371008.8;
 const double pictureWidth = 20;
 const double overlapPct = 0.3;
