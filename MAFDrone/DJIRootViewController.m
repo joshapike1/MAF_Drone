@@ -292,7 +292,17 @@
     NSMutableString *content = [NSMutableString string];
     
     for (int i = 0; i < wayPoints.count; i++) {
-        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@", wayPoints[i], @"||"]];
+        NSString *haystack = [NSString stringWithFormat:@"%@",wayPoints[i]];
+        NSString *prefix = @"<";
+        NSString *suffix = @">";
+        NSRange prefixRange = [haystack rangeOfString:prefix];
+        NSRange suffixRange = [[haystack substringFromIndex:prefixRange.location+prefixRange.length] rangeOfString:suffix];
+        NSRange needleRange = NSMakeRange(prefixRange.location+prefix.length, suffixRange.location);
+        NSString *needle = [haystack substringWithRange:needleRange];
+        NSLog(@"needle: %@", needle);
+        
+        
+        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@", needle, @"||"]];
     }
     
     [content appendFormat:@"%@", [NSString stringWithFormat: @"%@", @";\n"]];
