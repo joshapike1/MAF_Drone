@@ -86,7 +86,7 @@
     self.hsLabel.text = @"0.0 M/S";
     self.altitudeLabel.text = @"0 M";
     
-    self.gsButtonVC = [[MissionButtonViewController alloc] initWithNibName:@"DJIGSButtonViewController" bundle:[NSBundle mainBundle]];
+    self.gsButtonVC = [[MissionButtonViewController alloc] initWithNibName:@"MissionButtonViewController" bundle:[NSBundle mainBundle]];
     [self.gsButtonVC.view setFrame:CGRectMake(0, self.topBarView.frame.origin.y + self.topBarView.frame.size.height, self.gsButtonVC.view.frame.size.width, self.gsButtonVC.view.frame.size.height)];
     self.gsButtonVC.delegate = self;
     [self.view addSubview:self.gsButtonVC.view];
