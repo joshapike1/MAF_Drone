@@ -24,23 +24,23 @@ double long2;
     if (lat1 == 0.0) {
         [self ShowMessage:@"Loading" message:@"Please select a mission" actionTitle:@"OK"];
     } else {
-        [self ShowMessage:@"Loading" message:[NSString stringWithFormat:@"%.8lf", lat1 ] actionTitle:@"OK"];
+        //Andrew
+        /* ....HERE IS THE DATA YOU WILL NEED TO SEND, ALL ARE DOUBLES....
+         
+         lat1
+         long1
+         lat2
+         long2
+         
+         Selecting a mission and clicking the "Load" button pulls the data out of the saved string, don't worry about how,
+         just know it works :)
+         */
+        
+        //Switch to Mission View StoryBoard
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIViewController *vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"MissionViewController"];
+        [self presentViewController:vc animated:YES completion:nil];
     }
-    //^Ignore for now, used for testing purposes
-    
-    //Andrew
-    /* ....HERE IS THE DATA YOU WILL NEED TO SEND, ALL ARE DOUBLES....
-     
-     lat1
-     long1
-     lat2
-     long2
-     
-     Selecting a mission and clicking the "Load" button pulls the data out of the saved string, don't worry about how,
-     just know it works :)
-     */
-    
-    
 }
 
 //Details just returns the data in the array at index and displayes it in a popup

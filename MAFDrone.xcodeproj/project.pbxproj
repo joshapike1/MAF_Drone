@@ -15,6 +15,7 @@
 		18076B9E23D7F7E6003E2ACD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18076B9D23D7F7E6003E2ACD /* main.m */; };
 		18076BA823D7F7E7003E2ACD /* MAFDroneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18076BA723D7F7E7003E2ACD /* MAFDroneTests.m */; };
 		18076BB323D7F7E7003E2ACD /* MAFDroneUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18076BB223D7F7E7003E2ACD /* MAFDroneUITests.m */; };
+		1835F6D923FD155500DE1EC8 /* MissionButtonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1835F6D823FD155400DE1EC8 /* MissionButtonViewController.xib */; };
 		184ADB2C23D811FF00FCB477 /* DJIRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184ADB2B23D811FF00FCB477 /* DJIRootViewController.m */; };
 		184ADB2F23D816C200FCB477 /* DJIMapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184ADB2E23D816C200FCB477 /* DJIMapController.m */; };
 		184ADB3323D818CD00FCB477 /* DJIAircraftAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 184ADB3223D818CD00FCB477 /* DJIAircraftAnnotation.m */; };
@@ -25,6 +26,8 @@
 		184ADB4023D81C1000FCB477 /* DJIWaypointConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184ADB3F23D81C1000FCB477 /* DJIWaypointConfigViewController.xib */; };
 		184ADB4423D81CCC00FCB477 /* DemoUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 184ADB4323D81CCC00FCB477 /* DemoUtility.m */; };
 		185B288E23F3AFBC000AEAF3 /* LoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185B288D23F3AFBC000AEAF3 /* LoadViewController.m */; };
+		18C94B6B23FD0FC500B00F08 /* MissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C94B6A23FD0FC500B00F08 /* MissionViewController.m */; };
+		18C94B6E23FD14C400B00F08 /* MissionButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C94B6D23FD14C400B00F08 /* MissionButtonViewController.m */; };
 		1FB71B9723F4BA9C003329A9 /* FlightPlanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB71B9523F4BA9C003329A9 /* FlightPlanner.m */; };
 		F8708C96598372E0312BAAD0 /* libPods-MAFDrone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F31ECEDA450D03DA2CF28B42 /* libPods-MAFDrone.a */; };
 /* End PBXBuildFile section */
@@ -63,6 +66,7 @@
 		18076BAE23D7F7E7003E2ACD /* MAFDroneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MAFDroneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18076BB223D7F7E7003E2ACD /* MAFDroneUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAFDroneUITests.m; sourceTree = "<group>"; };
 		18076BB423D7F7E7003E2ACD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1835F6D823FD155400DE1EC8 /* MissionButtonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MissionButtonViewController.xib; sourceTree = "<group>"; };
 		184ADB2B23D811FF00FCB477 /* DJIRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJIRootViewController.m; sourceTree = "<group>"; };
 		184ADB2D23D8139400FCB477 /* DJIRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DJIRootViewController.h; sourceTree = "<group>"; };
 		184ADB2E23D816C200FCB477 /* DJIMapController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DJIMapController.m; sourceTree = "<group>"; };
@@ -82,6 +86,10 @@
 		184ADB4523D81E0A00FCB477 /* GSDemo-pch.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GSDemo-pch.pch"; sourceTree = "<group>"; };
 		185B288C23F3AF99000AEAF3 /* LoadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoadViewController.h; sourceTree = "<group>"; };
 		185B288D23F3AFBC000AEAF3 /* LoadViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoadViewController.m; sourceTree = "<group>"; };
+		18C94B6923FD0FB000B00F08 /* MissionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MissionViewController.h; sourceTree = "<group>"; };
+		18C94B6A23FD0FC500B00F08 /* MissionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MissionViewController.m; sourceTree = "<group>"; };
+		18C94B6C23FD14AD00B00F08 /* MissionButtonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MissionButtonViewController.h; sourceTree = "<group>"; };
+		18C94B6D23FD14C400B00F08 /* MissionButtonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MissionButtonViewController.m; sourceTree = "<group>"; };
 		1FB71B9523F4BA9C003329A9 /* FlightPlanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlightPlanner.m; sourceTree = "<group>"; };
 		1FB71B9623F4BA9C003329A9 /* FlightPlanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlightPlanner.h; sourceTree = "<group>"; };
 		411F131DDF35C307DE63DB00 /* Pods-MAFDrone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MAFDrone.debug.xcconfig"; path = "Target Support Files/Pods-MAFDrone/Pods-MAFDrone.debug.xcconfig"; sourceTree = "<group>"; };
@@ -148,6 +156,9 @@
 				184ADB3523D8195A00FCB477 /* DJIAircraftAnnotationView.m */,
 				184ADB3723D819B300FCB477 /* DJIGSButtonViewController.h */,
 				184ADB3823D819C000FCB477 /* DJIGSButtonViewController.m */,
+				18C94B6C23FD14AD00B00F08 /* MissionButtonViewController.h */,
+				18C94B6D23FD14C400B00F08 /* MissionButtonViewController.m */,
+				1835F6D823FD155400DE1EC8 /* MissionButtonViewController.xib */,
 				184ADB3A23D81A1200FCB477 /* DJIGSButtonViewController.xib */,
 				184ADB3023D816D800FCB477 /* DJIMapController.h */,
 				184ADB2E23D816C200FCB477 /* DJIMapController.m */,
@@ -160,6 +171,8 @@
 				184ADB2B23D811FF00FCB477 /* DJIRootViewController.m */,
 				185B288C23F3AF99000AEAF3 /* LoadViewController.h */,
 				185B288D23F3AFBC000AEAF3 /* LoadViewController.m */,
+				18C94B6923FD0FB000B00F08 /* MissionViewController.h */,
+				18C94B6A23FD0FC500B00F08 /* MissionViewController.m */,
 				18076B9423D7F7E3003E2ACD /* Main.storyboard */,
 				184ADB3F23D81C1000FCB477 /* DJIWaypointConfigViewController.xib */,
 				18076B9723D7F7E6003E2ACD /* Assets.xcassets */,
@@ -323,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18076B9B23D7F7E6003E2ACD /* LaunchScreen.storyboard in Resources */,
+				1835F6D923FD155500DE1EC8 /* MissionButtonViewController.xib in Resources */,
 				184ADB4023D81C1000FCB477 /* DJIWaypointConfigViewController.xib in Resources */,
 				18076B9823D7F7E6003E2ACD /* Assets.xcassets in Resources */,
 				184ADB3B23D81A1200FCB477 /* DJIGSButtonViewController.xib in Resources */,
@@ -395,12 +409,14 @@
 			files = (
 				184ADB3E23D81BC900FCB477 /* DJIWaypointConfigViewController.m in Sources */,
 				184ADB4423D81CCC00FCB477 /* DemoUtility.m in Sources */,
+				18C94B6B23FD0FC500B00F08 /* MissionViewController.m in Sources */,
 				184ADB3323D818CD00FCB477 /* DJIAircraftAnnotation.m in Sources */,
 				185B288E23F3AFBC000AEAF3 /* LoadViewController.m in Sources */,
 				1FB71B9723F4BA9C003329A9 /* FlightPlanner.m in Sources */,
 				184ADB2F23D816C200FCB477 /* DJIMapController.m in Sources */,
 				184ADB3923D819C000FCB477 /* DJIGSButtonViewController.m in Sources */,
 				184ADB3623D8195A00FCB477 /* DJIAircraftAnnotationView.m in Sources */,
+				18C94B6E23FD14C400B00F08 /* MissionButtonViewController.m in Sources */,
 				184ADB2C23D811FF00FCB477 /* DJIRootViewController.m in Sources */,
 				18076B8D23D7F7E3003E2ACD /* AppDelegate.m in Sources */,
 				18076B9E23D7F7E6003E2ACD /* main.m in Sources */,
