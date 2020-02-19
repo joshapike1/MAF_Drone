@@ -39,9 +39,9 @@
     
     if ([_delegate respondsToSelector:@selector(finishBtnActionInDJIWaypointConfigViewController:)]) {
         NSMutableString *content = [NSMutableString string];
-        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@%@", @"R[", self.resolutionTextField.text, @"]R"]];
-        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@%@", @"W[", self.widthTextField.text, @"]W"]];
-        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@%@", @"N[", self.nameTextField.text, @"]N||"]];
+        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@%@", @"R[", self.resolutionTextField.text, @"]"]];
+        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@%@", @"W[", self.widthTextField.text, @"]"]];
+        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@%@", @"N[", self.nameTextField.text, @"]||"]];
         //Get the documents directory:
         NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
         NSString *fileName = [documentsDirectory stringByAppendingPathComponent:@"waypoints.txt"];

@@ -149,30 +149,30 @@
     self.waypointMission.finishedAction = DJIWaypointMissionFinishedGoHome;
     
     ///<--------------------------This loads the mission, will need to put somewhere----------------------------->
-    //    [[self missionOperator] loadMission:self.waypointMission];
-    //
-    //    WeakRef(target);
-    //
-    //    [[self missionOperator] addListenerToFinished:self withQueue:dispatch_get_main_queue() andBlock:^(NSError * _Nullable error) {
-    //
-    //        WeakReturn(target);
-    //
-    //        if (error) {
-    //            [target showAlertViewWithTitle:@"Mission Execution Failed" withMessage:[NSString stringWithFormat:@"%@", error.description]];
-    //        }
-    //        else {
-    //            [target showAlertViewWithTitle:@"Mission Execution Finished" withMessage:nil];
-    //        }
-    //    }];
-    //
-    //    [[self missionOperator] uploadMissionWithCompletion:^(NSError * _Nullable error) {
-    //        if (error){
-    //            NSString* uploadError = [NSString stringWithFormat:@"Upload Mission failed:%@", error.description];
-    //            [self ShowMessage:@"" message:uploadError actionTitle:@"OK"];
-    //        }else {
-    //            [self ShowMessage:@"" message:@"Upload Mission Finished" actionTitle:@"OK"];
-    //        }
-    //    }];
+        [[self missionOperator] loadMission:self.waypointMission];
+    
+        WeakRef(target);
+    
+        [[self missionOperator] addListenerToFinished:self withQueue:dispatch_get_main_queue() andBlock:^(NSError * _Nullable error) {
+    
+            WeakReturn(target);
+    
+            if (error) {
+                [target showAlertViewWithTitle:@"Mission Execution Failed" withMessage:[NSString stringWithFormat:@"%@", error.description]];
+            }
+            else {
+                [target showAlertViewWithTitle:@"Mission Execution Finished" withMessage:nil];
+            }
+        }];
+    
+        [[self missionOperator] uploadMissionWithCompletion:^(NSError * _Nullable error) {
+            if (error){
+                NSString* uploadError = [NSString stringWithFormat:@"Upload Mission failed:%@", error.description];
+                [self ShowMessage:@"" message:uploadError actionTitle:@"OK"];
+            }else {
+                [self ShowMessage:@"" message:@"Upload Mission Finished" actionTitle:@"OK"];
+            }
+        }];
 }
 
 

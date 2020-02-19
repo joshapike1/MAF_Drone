@@ -1,4 +1,5 @@
 #import "LoadViewController.h"
+#import "FlightPlanner.h"
 
 @implementation LoadViewController 
 
@@ -10,6 +11,8 @@ double lat1;
 double long1;
 double lat2;
 double long2;
+int resolution;
+int width;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,7 +25,7 @@ double long2;
 - (IBAction)loadBtnAction:(id)sender {
     [self setCoords];
     if (lat1 == 0.0) {
-        [self ShowMessage:@"Loading" message:@"Please select a mission" actionTitle:@"OK"];
+        [self ShowMessage:@"No Mission Selected" message:@"Please select a mission" actionTitle:@"OK"];
     } else {
         //Andrew
         /* ....HERE IS THE DATA YOU WILL NEED TO SEND, ALL ARE DOUBLES....
@@ -31,10 +34,15 @@ double long2;
          long1
          lat2
          long2
+         resolution
+         width
          
          Selecting a mission and clicking the "Load" button pulls the data out of the saved string, don't worry about how,
          just know it works :)
          */
+        
+        
+        [FlightPlanner ]
         
         //Switch to Mission View StoryBoard
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -47,9 +55,9 @@ double long2;
 - (IBAction)detailsMapBtnAction:(id)sender {
     [self setCoords];
     if (lat1 == 0.0) {
-        [self ShowMessage:@"Loading" message:@"Please select a mission" actionTitle:@"OK"];
+        [self ShowMessage:@"No Mission Selected" message:@"Please select a mission" actionTitle:@"OK"];
     } else {
-        [self ShowMessage:@"Details" message:[NSString stringWithFormat:@"%@%@%@%f%@%f%@%f%@%f%@", @"Name: ", name, @"\nCoordinate 1: <", lat1, @",", long1, @">\nCoordinate 2: <", lat2, @"," ,long2, @">"] actionTitle:@"OK"];
+        [self ShowMessage:@"Details" message:[NSString stringWithFormat:@"%@%@%@%d%@%d%@%f%@%f%@%f%@%f%@", @"Name: ", name, @"\nImage Resolution: ", resolution, @"cm/px \nRunway Width: ", width, @"m \nCoordinate 1: <", lat1, @",", long1, @">\nCoordinate 2: <", lat2, @"," ,long2, @">"] actionTitle:@"OK"];
     }
 }
 
@@ -63,6 +71,8 @@ double long2;
     long1 = 0.0;
     lat2 = 0.0;
     long2 = 0.0;
+    resolution = 0;
+    width = 0;
     
     //Load missinos from text document
     NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
@@ -79,7 +89,7 @@ double long2;
     for (int i = 0; i < archivedWaypointsArray.count - 1; i++) {
         NSString *haystack = [NSString stringWithFormat:@"%@",archivedWaypointsArray[i]];
         NSString *prefix = @"N[";
-        NSString *suffix = @"]N";
+        NSString *suffix = @"]||";
         NSRange prefixRange = [haystack rangeOfString:prefix];
         NSRange suffixRange = [[haystack substringFromIndex:prefixRange.location+prefixRange.length] rangeOfString:suffix];
         NSRange needleRange = NSMakeRange(prefixRange.location+prefix.length, suffixRange.location);
@@ -99,9 +109,33 @@ double long2;
     //String to parse through
     NSString *haystack = whatToLoad;
     
+    //Find resolutoin
+    NSString *prefixRes =@"R[";
+    NSString *suffixRes = @"]W";
+    NSRange prefixRangeRes = [haystack rangeOfString:prefixRes];
+    NSRange suffixRangeRes = [[haystack substringFromIndex:prefixRangeRes.location+prefixRangeRes.length] rangeOfString:suffixRes];
+    NSRange needleRangeRes = NSMakeRange(prefixRangeRes.location+prefixRes.length, suffixRangeRes.location);
+    NSString *ResString = [haystack substringWithRange:needleRangeRes];
+    NSLog(@"Resolution: %@", ResString);
+    
+    resolution = [ResString intValue];
+    NSLog(@"Resolution Num: %d", resolution);
+    
+    //Find width
+    NSString *prefixWidth = @"W[";
+    NSString *suffixWidth = @"]N";
+    NSRange prefixRangeWidth = [haystack rangeOfString:prefixWidth];
+    NSRange suffixRangeWidth = [[haystack substringFromIndex:prefixRangeWidth.location+prefixRangeWidth.length] rangeOfString:suffixWidth];
+    NSRange needleRangeWidth = NSMakeRange(prefixRangeWidth.location+prefixWidth.length, suffixRangeWidth.location);
+    NSString *WidthString = [haystack substringWithRange:needleRangeWidth];
+    NSLog(@"Width: %@", WidthString);
+    
+    width = [WidthString intValue];
+    NSLog(@"Width Num: %d", width);
+    
     //Find name
     NSString *prefix = @"N[";
-    NSString *suffix = @"]N";
+    NSString *suffix = @"]||";
     NSRange prefixRange = [haystack rangeOfString:prefix];
     NSRange suffixRange = [[haystack substringFromIndex:prefixRange.location+prefixRange.length] rangeOfString:suffix];
     NSRange needleRange = NSMakeRange(prefixRange.location+prefix.length, suffixRange.location);
@@ -109,7 +143,7 @@ double long2;
     NSLog(@"Mission Name: %@", name);
     
     //Find Latitude 1
-    NSString *prefix1 = @"]N||";
+    NSString *prefix1 = @"]||";
     NSString *suffix1 = @",";
     NSRange prefixRangeLat1 = [haystack rangeOfString:prefix1];
     NSRange suffixRangeLat1 = [[haystack substringFromIndex:prefixRangeLat1.location+prefixRangeLat1.length] rangeOfString:suffix1];
@@ -134,7 +168,7 @@ double long2;
     NSRange suffixRangeLong1 = [[haystack substringFromIndex:prefixRangeLong1.location+prefixRangeLong1.length] rangeOfString:suffixLong1];
     NSRange needleRangeLong1 = NSMakeRange(prefixRangeLong1.location+prefixLong1.length, suffixRangeLong1.location);
     NSString *long1String = [haystack substringWithRange:needleRangeLong1];
-    NSLog(@"Long1: %@", lat1String);
+    NSLog(@"Long1: %@", long1String);
     
     //Check if + or - and set long1
     if([long1String hasPrefix:@"+"]) {
