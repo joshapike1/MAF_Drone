@@ -26,7 +26,21 @@ double long2;
     } else {
         [self ShowMessage:@"Loading" message:[NSString stringWithFormat:@"%.8lf", lat1 ] actionTitle:@"OK"];
     }
-    // HERE IS HOW TO LOAD DATA
+    //^Ignore for now, used for testing purposes
+    
+    //Andrew
+    /* ....HERE IS THE DATA YOU WILL NEED TO SEND, ALL ARE DOUBLES....
+     
+     lat1
+     long1
+     lat2
+     long2
+     
+     Selecting a mission and clicking the "Load" button pulls the data out of the saved string, don't worry about how,
+     just know it works :)
+     */
+    
+    
 }
 
 //Details just returns the data in the array at index and displayes it in a popup
