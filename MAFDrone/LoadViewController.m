@@ -26,13 +26,17 @@ double long2;
     } else {
         [self ShowMessage:@"Loading" message:[NSString stringWithFormat:@"%.8lf", lat1 ] actionTitle:@"OK"];
     }
-    // Send to Andrews function IMPORTANT: Coordinates are doubles: CLLocationCoordinate2D
+    // HERE IS HOW TO LOAD DATA
 }
 
 //Details just returns the data in the array at index and displayes it in a popup
 - (IBAction)detailsMapBtnAction:(id)sender {
     [self setCoords];
-    [self ShowMessage:@"Details" message:[NSString stringWithFormat:@"%@%@%@%f%@%f%@%f%@%f", @"Name: ", name, @" Coordinate 1: ", lat1, @",", long1, @" Coordinate 2: ", lat2, @"," ,long2] actionTitle:@"OK"];
+    if (lat1 == 0.0) {
+        [self ShowMessage:@"Loading" message:@"Please select a mission" actionTitle:@"OK"];
+    } else {
+        [self ShowMessage:@"Details" message:[NSString stringWithFormat:@"%@%@%@%f%@%f%@%f%@%f%@", @"Name: ", name, @"\nCoordinate 1: <", lat1, @",", long1, @">\nCoordinate 2: <", lat2, @"," ,long2, @">"] actionTitle:@"OK"];
+    }
 }
 
 //Runs to populate the listview
