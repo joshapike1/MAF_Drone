@@ -302,7 +302,7 @@
         NSLog(@"needle: %@", needle);
         
         
-        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@", needle, @"||"]];
+        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@%d%@", needle, @"|", i, @"|"]];
     }
     
     [content appendFormat:@"%@", [NSString stringWithFormat: @"%@", @";\n"]];
