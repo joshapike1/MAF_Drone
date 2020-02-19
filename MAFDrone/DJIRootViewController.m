@@ -257,8 +257,8 @@
     self.waypointMission.maxFlightSpeed = 10; //Set max speeed to 10m/s
     self.waypointMission.autoFlightSpeed = 5; //Set auto flight speed to 5m/s
     
-    self.waypointMission.headingMode = (DJIWaypointMissionHeadingMode)self.waypointConfigVC.headingSegmentedControl.selectedSegmentIndex;
-    [self.waypointMission setFinishedAction:(DJIWaypointMissionFinishedAction)self.waypointConfigVC.actionSegmentedControl.selectedSegmentIndex];
+//    self.waypointMission.headingMode = (DJIWaypointMissionHeadingMode)self.waypointConfigVC.headingSegmentedControl.selectedSegmentIndex;
+//    [self.waypointMission setFinishedAction:(DJIWaypointMissionFinishedAction)self.waypointConfigVC.actionSegmentedControl.selectedSegmentIndex];
     
     ///<--------------------------Not Needed for saving mission which is what this method does, will need for loading missions to drone----------------------------->
     //    [[self missionOperator] loadMission:self.waypointMission];

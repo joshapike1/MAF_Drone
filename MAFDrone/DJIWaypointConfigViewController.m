@@ -21,11 +21,9 @@
 
 - (void)initUI
 {
-    self.nameTextField.text = @""; //Set the name to ""
-    self.resolutionTextField.text = @"4"; //Set the resolution to 4
-    self.widthTextField.text = @"15"; //Set the width to 15 meters
-    [self.actionSegmentedControl setSelectedSegmentIndex:1]; //Set the finishAction to DJIWaypointMissionFinishedGoHome
-    [self.headingSegmentedControl setSelectedSegmentIndex:0]; //Set the headingMode to DJIWaypointMissionHeadingAuto
+    self.nameTextField.text = @""; //Set the name to "" (Default)
+    self.resolutionTextField.text = @"4"; //Set the resolution to 4 (Default)
+    self.widthTextField.text = @"15"; //Set the width to 15 meters (default)
     
 }
 
@@ -41,7 +39,9 @@
     
     if ([_delegate respondsToSelector:@selector(finishBtnActionInDJIWaypointConfigViewController:)]) {
         NSMutableString *content = [NSMutableString string];
-        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@%@", @"[", self.nameTextField.text, @"]||"]];
+        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@%@", @"R[", self.resolutionTextField.text, @"]R"]];
+        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@%@", @"W[", self.widthTextField.text, @"]W"]];
+        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@%@", @"N[", self.nameTextField.text, @"]N||"]];
         //Get the documents directory:
         NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
         NSString *fileName = [documentsDirectory stringByAppendingPathComponent:@"waypoints.txt"];

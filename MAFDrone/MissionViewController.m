@@ -55,6 +55,8 @@
     [self initUI];
     [self initData];
     
+    //Probably need to run waypoint setting too
+    [self initMission];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -67,6 +69,12 @@
 }
 
 #pragma mark Init Methods
+
+-(void) registerApp
+{
+    //Please enter your App key in the info.plist file to register the app.
+    [DJISDKManager registerAppWithDelegate:self];
+}
 
 -(void)initData
 {
@@ -106,11 +114,67 @@
     [self.view addSubview:self.waypointConfigVC.view];
 }
 
--(void) registerApp
+/*Initialize mission parameters (possibly load mission to drone)
+ -Checks there are waypoints on map/loaded into waypointMission
+ -Sets altitude to 10 for all waypoints
+ -Sets max flight speed to 10m/s and auto flight speed to 5m/s
+ -sets the headingMode to InitialDirection and finishAction to GoHome
+ -**Probably needs to load wayPoints to drone? Or does the start mission btn do this?**
+ */
+- (void)initMission
 {
-    //Please enter your App key in the info.plist file to register the app.
-    [DJISDKManager registerAppWithDelegate:self];
+    WeakRef(weakSelf);
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        WeakReturn(weakSelf);
+        weakSelf.waypointConfigVC.view.alpha = 0;
+    }];
+    
+    if (self.waypointMission.waypointCount == 0) {
+        [self ShowMessage:@"" message:@"No waypoints on map" actionTitle:@"OK"];
+        return;
+    }
+    
+    for (int i = 0; i < self.waypointMission.waypointCount; i++) {
+        DJIWaypoint* waypoint = [self.waypointMission waypointAtIndex:i];
+        
+        ///<-------------------NEEDS TO BE CALCULATED--------------------------->
+        waypoint.altitude = 10; //Set altitude to 10m
+    }
+    
+    self.waypointMission.maxFlightSpeed = 10; //Set max speeed to 10m/s
+    self.waypointMission.autoFlightSpeed = 5; //Set auto flight speed to 5m/s
+    
+    self.waypointMission.headingMode = DJIWaypointMissionHeadingUsingInitialDirection;
+    self.waypointMission.finishedAction = DJIWaypointMissionFinishedGoHome;
+    
+    ///<--------------------------This loads the mission, will need to put somewhere----------------------------->
+    //    [[self missionOperator] loadMission:self.waypointMission];
+    //
+    //    WeakRef(target);
+    //
+    //    [[self missionOperator] addListenerToFinished:self withQueue:dispatch_get_main_queue() andBlock:^(NSError * _Nullable error) {
+    //
+    //        WeakReturn(target);
+    //
+    //        if (error) {
+    //            [target showAlertViewWithTitle:@"Mission Execution Failed" withMessage:[NSString stringWithFormat:@"%@", error.description]];
+    //        }
+    //        else {
+    //            [target showAlertViewWithTitle:@"Mission Execution Finished" withMessage:nil];
+    //        }
+    //    }];
+    //
+    //    [[self missionOperator] uploadMissionWithCompletion:^(NSError * _Nullable error) {
+    //        if (error){
+    //            NSString* uploadError = [NSString stringWithFormat:@"Upload Mission failed:%@", error.description];
+    //            [self ShowMessage:@"" message:uploadError actionTitle:@"OK"];
+    //        }else {
+    //            [self ShowMessage:@"" message:@"Upload Mission Finished" actionTitle:@"OK"];
+    //        }
+    //    }];
 }
+
 
 - (void) ShowMessage:(NSString*)title message:(NSString*) message actionTitle:(NSString*) cancleBtnTitle
 {
@@ -126,7 +190,6 @@
         
     });
 }
-
 
 #pragma mark DJISDKManagerDelegate Methods
 - (void)appRegisteredWithError:(NSError *)error
@@ -215,17 +278,6 @@
 
 #pragma mark - DJIWaypointConfigViewControllerDelegate Methods
 
-- (void)cancelBtnActionInDJIWaypointConfigViewController:(DJIWaypointConfigViewController *)waypointConfigVC
-{
-    WeakRef(weakSelf);
-    
-    [UIView animateWithDuration:0.25 animations:^{
-        WeakReturn(weakSelf);
-        weakSelf.waypointConfigVC.view.alpha = 0;
-    }];
-    
-}
-
 - (void)showAlertViewWithTitle:(NSString *)title withMessage:(NSString *)message
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
@@ -234,207 +286,33 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)finishBtnActionInDJIWaypointConfigViewController:(DJIWaypointConfigViewController *)waypointConfigVC
+#pragma mark - MissionButtonViewController Delegate Methods
+
+- (void)stopBtnActionInGSButtonVC:(MissionButtonViewController *)GSBtnVC
 {
-    WeakRef(weakSelf);
-    
-    [UIView animateWithDuration:0.25 animations:^{
-        WeakReturn(weakSelf);
-        weakSelf.waypointConfigVC.view.alpha = 0;
-    }];
-    
-    if (self.waypointMission.waypointCount != 2) {
-        [self ShowMessage:@"" message:@"You must have exactly two waypoints to configure, on each end of the runway" actionTitle:@"OK"];
-        return;
-    }
-    
-    for (int i = 0; i < self.waypointMission.waypointCount; i++) {
-        DJIWaypoint* waypoint = [self.waypointMission waypointAtIndex:i];
-        
-        ///<-------------------NEEDS TO BE CALCULATED--------------------------->
-        waypoint.altitude = 10; //Set altitude to 10m
-    }
-    
-    self.waypointMission.maxFlightSpeed = 10; //Set max speeed to 10m/s
-    self.waypointMission.autoFlightSpeed = 5; //Set auto flight speed to 5m/s
-    
-    self.waypointMission.headingMode = (DJIWaypointMissionHeadingMode)self.waypointConfigVC.headingSegmentedControl.selectedSegmentIndex;
-    [self.waypointMission setFinishedAction:(DJIWaypointMissionFinishedAction)self.waypointConfigVC.actionSegmentedControl.selectedSegmentIndex];
-    
-    ///<--------------------------Not Needed for saving mission which is what this method does, will need for loading missions to drone----------------------------->
-    //    [[self missionOperator] loadMission:self.waypointMission];
-    //
-    //    WeakRef(target);
-    //
-    //    [[self missionOperator] addListenerToFinished:self withQueue:dispatch_get_main_queue() andBlock:^(NSError * _Nullable error) {
-    //
-    //        WeakReturn(target);
-    //
-    //        if (error) {
-    //            [target showAlertViewWithTitle:@"Mission Execution Failed" withMessage:[NSString stringWithFormat:@"%@", error.description]];
-    //        }
-    //        else {
-    //            [target showAlertViewWithTitle:@"Mission Execution Finished" withMessage:nil];
-    //        }
-    //    }];
-    //
-    //    [[self missionOperator] uploadMissionWithCompletion:^(NSError * _Nullable error) {
-    //        if (error){
-    //            NSString* uploadError = [NSString stringWithFormat:@"Upload Mission failed:%@", error.description];
-    //            [self ShowMessage:@"" message:uploadError actionTitle:@"OK"];
-    //        }else {
-    //            [self ShowMessage:@"" message:@"Upload Mission Finished" actionTitle:@"OK"];
-    //        }
-    //    }];
-    
-    ///<-----------Saving the waypoints to a text file-------------->
-    //New line is created with string to append
-    NSArray* wayPoints = self.mapController.wayPoints;
-    NSMutableString *content = [NSMutableString string];
-    
-    for (int i = 0; i < wayPoints.count; i++) {
-        NSString *haystack = [NSString stringWithFormat:@"%@",wayPoints[i]];
-        NSString *prefix = @"<";
-        NSString *suffix = @">";
-        NSRange prefixRange = [haystack rangeOfString:prefix];
-        NSRange suffixRange = [[haystack substringFromIndex:prefixRange.location+prefixRange.length] rangeOfString:suffix];
-        NSRange needleRange = NSMakeRange(prefixRange.location+prefix.length, suffixRange.location);
-        NSString *needle = [haystack substringWithRange:needleRange];
-        NSLog(@"needle: %@", needle);
-        
-        
-        [content appendFormat:@"%@", [NSString stringWithFormat: @"%@%@%d%@", needle, @"|", i, @"|"]];
-    }
-    
-    [content appendFormat:@"%@", [NSString stringWithFormat: @"%@", @";\n"]];
-    //Get the documents directory:
-    NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    NSString *fileName = [documentsDirectory stringByAppendingPathComponent:@"waypoints.txt"];
-    
-    //Append the string to the file, if no file then create it
-    NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:fileName];
-    if (fileHandle){
-        [fileHandle seekToEndOfFile];
-        [fileHandle writeData:[content dataUsingEncoding:NSUTF8StringEncoding]];
-        [fileHandle closeFile];
-    }
-    else{
-        [content writeToFile:fileName atomically:NO encoding:NSStringEncodingConversionAllowLossy error:nil];
-    }
-    
-    //Switch storyboards
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"IntroController"];
-    [self presentViewController:vc animated:YES completion:nil];
-}
-
-#pragma mark - DJIGSButtonViewController Delegate Methods
-
-///<------Old save and load buttons------>
-//
-//-(void)loadBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC {
-//    [self loadMissions];
-//}
-
-//Old save button
-//-(void)saveBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC {
-//    [self saveMission];
-//}
-//________________________________________________________________________//
-
-///<------Stop and start buttons not needed right now------>
-//- (void)stopBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
-//{
-//    [[self missionOperator] stopMissionWithCompletion:^(NSError * _Nullable error) {
-//        if (error){
-//            [self ShowMessage:@"" message:@"Mission cannot be stopped" actionTitle:@"OK"];
-//        }else
-//        {
-//            [self ShowMessage:@"" message:@"Mission stopped" actionTitle:@"OK"];
-//        }
-//
-//    }];
-//
-//}
-
-//- (void)startBtnActionInGSButtonVC:(DJIGSButtonViewController *)GSBtnVC
-//{
-//    [[self missionOperator] startMissionWithCompletion:^(NSError * _Nullable error) {
-//        if (error){
-//            [self ShowMessage:@"Start Mission Failed" message:error.description actionTitle:@"OK"];
-//        }else
-//        {
-//            [self ShowMessage:@"" message:@"Mission Started" actionTitle:@"OK"];
-//        }
-//    }];
-//
-//}
-
-- (void)clearBtnActionInGSButtonVC:(MissionButtonViewController *)GSBtnVC
-{
-    [self.mapController cleanAllPointsWithMapView:self.mapView];
-}
-
-- (void)focusMapBtnActionInGSButtonVC:(MissionButtonViewController *)GSBtnVC
-{
-    [self focusMap];
-}
-
-- (void)saveBtnActionInGSButtonVC:(MissionButtonViewController *)GSBtnVC
-{
-    WeakRef(weakSelf);
-    
-    NSArray* wayPoints = self.mapController.wayPoints;
-    if (wayPoints == nil || wayPoints.count < 2) { //DJIWaypointMissionMinimumWaypointCount is 2.
-        [self ShowMessage:@"No or not enough waypoints for mission" message:@"" actionTitle:@"OK"];
-        return;
-    }
-    if (wayPoints.count > 2) {
-        [self ShowMessage:@"Too many waypoints" message:@"" actionTitle:@"OK"];
-        return;
-    }
-    
-    [UIView animateWithDuration:0.25 animations:^{
-        WeakReturn(weakSelf);
-        weakSelf.waypointConfigVC.view.alpha = 1.0;
-    }];
-    
-    if (self.waypointMission){
-        [self.waypointMission removeAllWaypoints];
-    }
-    else{
-        self.waypointMission = [[DJIMutableWaypointMission alloc] init];
-    }
-    
-    //USE THIS FOR LOADING MISSIONS____________________________________________________///////
-    for (int i = 0; i < wayPoints.count; i++) {
-        CLLocation* location = [wayPoints objectAtIndex:i];
-        if (CLLocationCoordinate2DIsValid(location.coordinate)) {
-            DJIWaypoint* waypoint = [[DJIWaypoint alloc] initWithCoordinate:location.coordinate];
-            [self.waypointMission addWaypoint:waypoint];
+    [[self missionOperator] stopMissionWithCompletion:^(NSError * _Nullable error) {
+        if (error){
+            [self ShowMessage:@"" message:@"Mission cannot be stopped" actionTitle:@"OK"];
+        }else
+        {
+            [self ShowMessage:@"" message:@"Mission stopped" actionTitle:@"OK"];
         }
-    }
-    
+
+    }];
+
 }
 
-- (void)switchToMode:(MissionViewMode)mode inGSButtonVC:(MissionButtonViewController *)GSBtnVC
+- (void)startBtnActionInGSButtonVC:(MissionButtonViewController *)GSBtnVC
 {
-    if (mode == MissionViewMode_EditMode) {
-        [self focusMap];
-    }
-    
-}
+    [[self missionOperator] startMissionWithCompletion:^(NSError * _Nullable error) {
+        if (error){
+            [self ShowMessage:@"Start Mission Failed" message:error.description actionTitle:@"OK"];
+        }else
+        {
+            [self ShowMessage:@"" message:@"Mission Started" actionTitle:@"OK"];
+        }
+    }];
 
-- (void)addBtn:(UIButton *)button withActionInGSButtonVC:(MissionButtonViewController *)GSBtnVC
-{
-    if (self.isEditingPoints) {
-        self.isEditingPoints = NO;
-        [button setTitle:@"Add" forState:UIControlStateNormal];
-    }else
-    {
-        self.isEditingPoints = YES;
-        [button setTitle:@"Done" forState:UIControlStateNormal];
-    }
 }
 
 #pragma mark - CLLocationManagerDelegate

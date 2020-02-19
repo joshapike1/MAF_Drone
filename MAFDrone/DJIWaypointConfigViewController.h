@@ -14,8 +14,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *resolutionTextField;
 @property (weak, nonatomic) IBOutlet UITextField *widthTextField;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *actionSegmentedControl;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *headingSegmentedControl;
+//@property (weak, nonatomic) IBOutlet UISegmentedControl *actionSegmentedControl;
+//@property (weak, nonatomic) IBOutlet UISegmentedControl *headingSegmentedControl;
 
 @property (weak, nonatomic) id <DJIWaypointConfigViewControllerDelegate>delegate;
 

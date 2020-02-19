@@ -78,8 +78,8 @@ double long2;
     //Extract names of mission only (for list population)
     for (int i = 0; i < archivedWaypointsArray.count - 1; i++) {
         NSString *haystack = [NSString stringWithFormat:@"%@",archivedWaypointsArray[i]];
-        NSString *prefix = @"[";
-        NSString *suffix = @"]";
+        NSString *prefix = @"N[";
+        NSString *suffix = @"]N";
         NSRange prefixRange = [haystack rangeOfString:prefix];
         NSRange suffixRange = [[haystack substringFromIndex:prefixRange.location+prefixRange.length] rangeOfString:suffix];
         NSRange needleRange = NSMakeRange(prefixRange.location+prefix.length, suffixRange.location);
@@ -100,8 +100,8 @@ double long2;
     NSString *haystack = whatToLoad;
     
     //Find name
-    NSString *prefix = @"[";
-    NSString *suffix = @"]";
+    NSString *prefix = @"N[";
+    NSString *suffix = @"]N";
     NSRange prefixRange = [haystack rangeOfString:prefix];
     NSRange suffixRange = [[haystack substringFromIndex:prefixRange.location+prefixRange.length] rangeOfString:suffix];
     NSRange needleRange = NSMakeRange(prefixRange.location+prefix.length, suffixRange.location);
@@ -109,7 +109,7 @@ double long2;
     NSLog(@"Mission Name: %@", name);
     
     //Find Latitude 1
-    NSString *prefix1 = @"]||";
+    NSString *prefix1 = @"]N||";
     NSString *suffix1 = @",";
     NSRange prefixRangeLat1 = [haystack rangeOfString:prefix1];
     NSRange suffixRangeLat1 = [[haystack substringFromIndex:prefixRangeLat1.location+prefixRangeLat1.length] rangeOfString:suffix1];
