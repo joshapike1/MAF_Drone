@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
-
+#import "FlightPlanner.h"
+#include <CoreLocation/CoreLocation.h>
 @class LoadViewController;
 
 @protocol LoadViewControllerDelegate <NSObject>

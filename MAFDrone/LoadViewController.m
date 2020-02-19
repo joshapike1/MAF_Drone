@@ -1,5 +1,4 @@
 #import "LoadViewController.h"
-#import "FlightPlanner.h"
 
 @implementation LoadViewController 
 
@@ -42,7 +41,8 @@ int width;
          */
         
         
-        [FlightPlanner ]
+        CLLocationCoordinate2D Point1 = [CoordObject toStructLat:lat1 lon:long1];
+        CLLocationCoordinate2D Point2 = [CoordObject toStructLat:lat2 lon:long2];
         
         //Switch to Mission View StoryBoard
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
