@@ -142,6 +142,13 @@ const double surveyWidth = 50;
     return new;
 }
 
++ (CLLocationCoordinate2D) toStructLat: (double) lat lon: (double)lon {
+    CLLocationCoordinate2D new;
+    new.latitude = lat;
+    new.longitude = lon;
+    return new;
+}
+
 + (CoordObject*) makeCoordDat1: (double) dat1 dat2: (double) dat2 {
     CoordObject* newCoord;
     return [newCoord initWithDat: dat1 dat2: dat2];

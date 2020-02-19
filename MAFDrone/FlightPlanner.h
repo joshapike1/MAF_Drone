@@ -18,6 +18,7 @@
 - (id) initWithDat:(double) dat1 dat2: (double)dat2;
 + (CoordObject*) makeCoordDat1: (double) dat1 dat2: (double) dat2;
 - (CLLocationCoordinate2D) toStruct;
++ (CLLocationCoordinate2D) toStructLat: (double)lat lon: (double)lon;
 @end
 
 struct MAFDistanceHeading {
