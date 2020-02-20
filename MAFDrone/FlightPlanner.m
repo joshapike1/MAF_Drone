@@ -15,7 +15,7 @@
 const double radius = 6371008.8;
 const double pictureWidth = 20;
 const double overlapPct = 0.3;
-const double surveyWidth = 50;
+const double surveyWidth = 30;
 
 //after functions are done, we convert back to degrees
 + (CoordObject*) toMagBearing: (CoordObject*)point referenceAngle: (double)ref {

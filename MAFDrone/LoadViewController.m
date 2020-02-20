@@ -1,4 +1,5 @@
 #import "LoadViewController.h"
+#import "MissionViewController.h"
 
 @implementation LoadViewController 
 
@@ -40,14 +41,12 @@ int width;
          just know it works :)
          */
         
-        
-        CLLocationCoordinate2D Point1 = [CoordObject toStructLat:lat1 lon:long1];
-        CLLocationCoordinate2D Point2 = [CoordObject toStructLat:lat2 lon:long2];
-        
         //Switch to Mission View StoryBoard
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UIViewController *vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"MissionViewController"];
+        MissionViewController *vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"MissionViewController"];
         [self presentViewController:vc animated:YES completion:nil];
+        [vc populateMaplat1:lat1 lon1:long1 lat2:lat2 lon2:long2];
+        NSLog(@"this shouldn't execute");
     }
 }
 

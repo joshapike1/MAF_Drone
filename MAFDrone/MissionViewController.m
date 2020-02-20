@@ -56,6 +56,7 @@
     [self initData];
     
     //Probably need to run waypoint setting too
+    
     [self initMission];
 }
 
@@ -149,30 +150,30 @@
     self.waypointMission.finishedAction = DJIWaypointMissionFinishedGoHome;
     
     ///<--------------------------This loads the mission, will need to put somewhere----------------------------->
-        [[self missionOperator] loadMission:self.waypointMission];
+    [[self missionOperator] loadMission:self.waypointMission];
     
-        WeakRef(target);
+    WeakRef(target);
     
-        [[self missionOperator] addListenerToFinished:self withQueue:dispatch_get_main_queue() andBlock:^(NSError * _Nullable error) {
+    [[self missionOperator] addListenerToFinished:self withQueue:dispatch_get_main_queue() andBlock:^(NSError * _Nullable error) {
+        
+        WeakReturn(target);
+        
+        if (error) {
+            [target showAlertViewWithTitle:@"Mission Execution Failed" withMessage:[NSString stringWithFormat:@"%@", error.description]];
+        }
+        else {
+            [target showAlertViewWithTitle:@"Mission Execution Finished" withMessage:nil];
+        }
+    }];
     
-            WeakReturn(target);
-    
-            if (error) {
-                [target showAlertViewWithTitle:@"Mission Execution Failed" withMessage:[NSString stringWithFormat:@"%@", error.description]];
-            }
-            else {
-                [target showAlertViewWithTitle:@"Mission Execution Finished" withMessage:nil];
-            }
-        }];
-    
-        [[self missionOperator] uploadMissionWithCompletion:^(NSError * _Nullable error) {
-            if (error){
-                NSString* uploadError = [NSString stringWithFormat:@"Upload Mission failed:%@", error.description];
-                [self ShowMessage:@"" message:uploadError actionTitle:@"OK"];
-            }else {
-                [self ShowMessage:@"" message:@"Upload Mission Finished" actionTitle:@"OK"];
-            }
-        }];
+    [[self missionOperator] uploadMissionWithCompletion:^(NSError * _Nullable error) {
+        if (error){
+            NSString* uploadError = [NSString stringWithFormat:@"Upload Mission failed:%@", error.description];
+            [self ShowMessage:@"" message:uploadError actionTitle:@"OK"];
+        }else {
+            [self ShowMessage:@"" message:@"Upload Mission Finished" actionTitle:@"OK"];
+        }
+    }];
 }
 
 
@@ -286,6 +287,43 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+- (void)createMission:(MissionButtonViewController *)GSBtnVC
+{
+    WeakRef(weakSelf);
+    
+    NSArray* wayPoints = self.mapController.wayPoints;
+    if (wayPoints == nil || wayPoints.count < 2) { //DJIWaypointMissionMinimumWaypointCount is 2.
+        [self ShowMessage:@"No or not enough waypoints for mission" message:@"" actionTitle:@"OK"];
+        return;
+    }
+    if (wayPoints.count >= 98) {
+        [self ShowMessage:@"Too many waypoints" message:@"" actionTitle:@"OK"];
+        return;
+    }
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        WeakReturn(weakSelf);
+        weakSelf.waypointConfigVC.view.alpha = 1.0;
+    }];
+    
+    if (self.waypointMission){
+        [self.waypointMission removeAllWaypoints];
+    }
+    else{
+        self.waypointMission = [[DJIMutableWaypointMission alloc] init];
+    }
+    
+    //USE THIS FOR LOADING MISSIONS____________________________________________________///////
+    for (int i = 0; i < wayPoints.count; i++) {
+        CLLocation* location = [wayPoints objectAtIndex:i];
+        if (CLLocationCoordinate2DIsValid(location.coordinate)) {
+            DJIWaypoint* waypoint = [[DJIWaypoint alloc] initWithCoordinate:location.coordinate];
+            [self.waypointMission addWaypoint:waypoint];
+        }
+    }
+    
+}
+
 #pragma mark - MissionButtonViewController Delegate Methods
 
 - (void)stopBtnActionInGSButtonVC:(MissionButtonViewController *)GSBtnVC
@@ -297,13 +335,14 @@
         {
             [self ShowMessage:@"" message:@"Mission stopped" actionTitle:@"OK"];
         }
-
+        
     }];
-
+    
 }
 
 - (void)startBtnActionInGSButtonVC:(MissionButtonViewController *)GSBtnVC
 {
+    [self createMission:nil];
     [[self missionOperator] startMissionWithCompletion:^(NSError * _Nullable error) {
         if (error){
             [self ShowMessage:@"Start Mission Failed" message:error.description actionTitle:@"OK"];
@@ -312,7 +351,7 @@
             [self ShowMessage:@"" message:@"Mission Started" actionTitle:@"OK"];
         }
     }];
-
+    
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -338,6 +377,17 @@
     }
     
     return nil;
+}
+
+- (void)populateMaplat1: (double)lat1 lon1: (double)lon1 lat2: (double)lat2 lon2: (double)lon2 {
+    CLLocationCoordinate2D Point1 = [CoordObject toStructLat:lat1 lon:lon1];
+    CLLocationCoordinate2D Point2 = [CoordObject toStructLat:lat2 lon:lon2];
+    NSMutableArray* arr = [FlightPlanner generateWaypointMission:Point1 to:Point2];
+    
+    for (CoordObject* point in arr) {
+        CLLocationCoordinate2D coord = [point toStruct];
+        [self.mapController addLocation:coord withMapView:self.mapView];
+    }
 }
 
 #pragma mark DJIFlightControllerDelegate
