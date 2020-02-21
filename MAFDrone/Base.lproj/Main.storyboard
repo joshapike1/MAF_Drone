@@ -56,7 +56,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="dZt-mG-Kvu" kind="show" id="mhS-AL-2Zv"/>
+                                    <action selector="loadBtnAction:" destination="Uui-d7-mBN" eventType="touchUpInside" id="4kL-rs-5Rt"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MAF Drone Deploy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCb-3d-1PG">
@@ -70,6 +70,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <navigationItem key="navigationItem" id="IdD-zg-Soj"/>
+                    <connections>
+                        <outlet property="loadBtn" destination="IxX-De-FVS" id="ybx-db-Vnj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CAH-jL-lSU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -78,7 +81,7 @@
         <!--Load View Controller-->
         <scene sceneID="9Dl-Us-BnF">
             <objects>
-                <viewController id="dZt-mG-Kvu" customClass="LoadViewController" sceneMemberID="viewController">
+                <viewController restorationIdentifier="LoadViewController" storyboardIdentifier="LoadViewController" id="dZt-mG-Kvu" customClass="LoadViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IQr-pG-YXU"/>
                         <viewControllerLayoutGuide type="bottom" id="PgK-he-Sw0"/>
@@ -419,7 +422,6 @@
         <image name="square.and.arrow.up" catalog="system" width="56" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aHL-Rn-8Ee"/>
-        <segue reference="Pfd-ja-52t"/>
+        <segue reference="Wo5-uY-gyz"/>
     </inferredMetricsTieBreakers>
 </document>

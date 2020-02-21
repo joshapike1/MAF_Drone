@@ -5,16 +5,15 @@
 #import <DJISDK/DJISDK.h>
 #import "DJIMapController.h"
 #import "MissionButtonViewController.h"
-#import "DJIWaypointConfigViewController.h"
+//#import "DJIWaypointConfigViewController.h"
 #import "DemoUtility.h"
 
 #define ENTER_DEBUG_MODE 0
 
-@interface MissionViewController ()<MissionButtonViewControllerDelegate, DJIWaypointConfigViewControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, DJISDKManagerDelegate, DJIFlightControllerDelegate>
+@interface MissionViewController ()<MissionButtonViewControllerDelegate, MKMapViewDelegate, CLLocationManagerDelegate, DJISDKManagerDelegate, DJIFlightControllerDelegate>
 
 @property (nonatomic, assign) BOOL isEditingPoints;
 @property (nonatomic, strong) MissionButtonViewController *gsButtonVC;
-@property (nonatomic, strong) DJIWaypointConfigViewController *waypointConfigVC;
 @property (nonatomic, strong) DJIMapController *mapController;
 
 @property(nonatomic, strong) CLLocationManager* locationManager;
@@ -56,8 +55,6 @@
     [self initData];
     
     //Probably need to run waypoint setting too
-    
-    [self initMission];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,20 +96,6 @@
     [self.gsButtonVC.view setFrame:CGRectMake(0, self.topBarView.frame.origin.y + self.topBarView.frame.size.height, self.gsButtonVC.view.frame.size.width, self.gsButtonVC.view.frame.size.height)];
     self.gsButtonVC.delegate = self;
     [self.view addSubview:self.gsButtonVC.view];
-    
-    self.waypointConfigVC = [[DJIWaypointConfigViewController alloc] initWithNibName:@"DJIWaypointConfigViewController" bundle:[NSBundle mainBundle]];
-    self.waypointConfigVC.view.alpha = 0;
-    self.waypointConfigVC.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin;
-    
-    [self.waypointConfigVC.view setCenter:self.view.center];
-    
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) //Check if it's using iPad and center the config view
-    {
-        self.waypointConfigVC.view.center = self.view.center;
-    }
-    
-    self.waypointConfigVC.delegate = self;
-    [self.view addSubview:self.waypointConfigVC.view];
 }
 
 /*Initialize mission parameters (possibly load mission to drone)
@@ -120,22 +103,10 @@
  -Sets altitude to 10 for all waypoints
  -Sets max flight speed to 10m/s and auto flight speed to 5m/s
  -sets the headingMode to InitialDirection and finishAction to GoHome
- -**Probably needs to load wayPoints to drone? Or does the start mission btn do this?**
+ -Was previously "Finished" button
  */
 - (void)initMission
 {
-    WeakRef(weakSelf);
-    
-    [UIView animateWithDuration:0.25 animations:^{
-        WeakReturn(weakSelf);
-        weakSelf.waypointConfigVC.view.alpha = 0;
-    }];
-    
-    if (self.waypointMission.waypointCount == 0) {
-        [self ShowMessage:@"" message:@"No waypoints on map" actionTitle:@"OK"];
-        return;
-    }
-    
     for (int i = 0; i < self.waypointMission.waypointCount; i++) {
         DJIWaypoint* waypoint = [self.waypointMission waypointAtIndex:i];
         
@@ -168,8 +139,7 @@
     
     [[self missionOperator] uploadMissionWithCompletion:^(NSError * _Nullable error) {
         if (error){
-            NSString* uploadError = [NSString stringWithFormat:@"Upload Mission failed:%@", error.description];
-            [self ShowMessage:@"" message:uploadError actionTitle:@"OK"];
+            [self ShowMessage:@"Upload Mission Failed" message:@"Most likely not connected to drone" actionTitle:@"OK"];
         }else {
             [self ShowMessage:@"" message:@"Upload Mission Finished" actionTitle:@"OK"];
         }
@@ -289,22 +259,23 @@
 
 - (void)createMission:(MissionButtonViewController *)GSBtnVC
 {
-    WeakRef(weakSelf);
+    //WeakRef(weakSelf);
     
     NSArray* wayPoints = self.mapController.wayPoints;
     if (wayPoints == nil || wayPoints.count < 2) { //DJIWaypointMissionMinimumWaypointCount is 2.
         [self ShowMessage:@"No or not enough waypoints for mission" message:@"" actionTitle:@"OK"];
         return;
     }
+    
+    if (wayPoints.count <= 1) {
+        [self ShowMessage:@"" message:@"Not enough waypoints" actionTitle:@"OK"];
+        return;
+    }
+    
     if (wayPoints.count >= 98) {
         [self ShowMessage:@"Too many waypoints" message:@"" actionTitle:@"OK"];
         return;
     }
-    
-    [UIView animateWithDuration:0.25 animations:^{
-        WeakReturn(weakSelf);
-        weakSelf.waypointConfigVC.view.alpha = 1.0;
-    }];
     
     if (self.waypointMission){
         [self.waypointMission removeAllWaypoints];
@@ -342,6 +313,7 @@
 
 - (void)startBtnActionInGSButtonVC:(MissionButtonViewController *)GSBtnVC
 {
+    [self initMission];
     [self createMission:nil];
     [[self missionOperator] startMissionWithCompletion:^(NSError * _Nullable error) {
         if (error){

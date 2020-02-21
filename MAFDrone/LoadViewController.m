@@ -77,6 +77,7 @@ int width;
     NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     NSString *fileName = [documentsDirectory stringByAppendingPathComponent:@"waypoints.txt"];
     NSString *waypointsText = [NSString stringWithContentsOfFile:fileName];
+
     
     //Insert data into array seperated by mission
     archivedWaypointsArray = [waypointsText componentsSeparatedByString:@";\n"];
