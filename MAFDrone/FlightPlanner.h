@@ -34,6 +34,8 @@ typedef struct MAFDistanceHeading MAFDistanceHeading;
 + (MAFDistanceHeading) distBetweenPoint: (CLLocationCoordinate2D)coord1 toPoint: (CLLocationCoordinate2D)coord2;
 + (CoordObject*) destinationCoordinate: (CLLocationCoordinate2D)reference distance:(double)d bearing:(double)b;
 + (NSMutableArray*) generateWaypointMission:(CLLocationCoordinate2D)reference to: (CLLocationCoordinate2D)endpoint;
++ (double) distBetweenCoords: (CLLocationCoordinate2D)coord1 to:(CLLocationCoordinate2D) coord2;
++ (int) totalWaypoints: (CLLocationCoordinate2D) coord1 to:(CLLocationCoordinate2D) coord2;
 @end
 
 #endif /* FlightPlanner_h */

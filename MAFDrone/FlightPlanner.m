@@ -120,6 +120,23 @@ const double surveyWidth = 30;
     return gpsCoords;
 }
 
++ (double) distBetweenCoords: (CLLocationCoordinate2D)coord1 to:(CLLocationCoordinate2D) coord2 {
+    MAFDistanceHeading surveyLength = [FlightPlanner distBetweenPoint:coord1 toPoint:coord2];
+    return surveyLength.distance;
+}
+
++ (int) totalWaypoints: (CLLocationCoordinate2D) coord1 to:(CLLocationCoordinate2D) coord2 {
+    MAFDistanceHeading surveyLength = [FlightPlanner distBetweenPoint:coord1 toPoint:coord2];
+    //distance is distance of the survey
+    //angle is reference angle (in radians)
+
+    
+    double pictureDist = (pictureWidth + sqrt(1-overlapPct) * pictureWidth) / 2;
+    int width = ceil(surveyWidth/pictureDist);
+    int length =  ceil(surveyLength.distance/pictureDist);
+    return width * length;
+}
+
 @end
 
 //If I can't keep track of structs, then this just this holds latitude/longitude information

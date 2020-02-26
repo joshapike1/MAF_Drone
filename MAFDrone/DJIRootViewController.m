@@ -6,6 +6,7 @@
 #import "DJIGSButtonViewController.h"
 #import "DJIWaypointConfigViewController.h"
 #import "DemoUtility.h"
+#import "FlightPlanner.h"
 
 #define ENTER_DEBUG_MODE 0
 
@@ -244,6 +245,19 @@
     
     if (self.waypointMission.waypointCount != 2) {
         [self ShowMessage:@"" message:@"You must have exactly two waypoints to configure, on each end of the runway" actionTitle:@"OK"];
+        return;
+    }
+    
+    CLLocationCoordinate2D c1 = [[self.waypointMission waypointAtIndex: 0] coordinate];
+    CLLocationCoordinate2D c2 = [[self.waypointMission waypointAtIndex: 1] coordinate];
+    
+    if ([FlightPlanner distBetweenCoords:c1 to:c2] > 2500) {
+        [self ShowMessage:@"" message:@"Survey over 2500m length limit" actionTitle:@"OK"];
+        return;
+    }
+    
+    if ([FlightPlanner totalWaypoints:c1 to:c2] > 98) {
+        [self ShowMessage:@"" message:@"Mission would have over 98 waypoints - would be unable to create a waypoint Mission" actionTitle:@"OK"];
         return;
     }
     
