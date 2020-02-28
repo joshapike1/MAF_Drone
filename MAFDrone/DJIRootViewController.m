@@ -49,6 +49,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _mapView.mapType = MKMapTypeHybrid;
     
     [self registerApp];
     
@@ -251,12 +252,12 @@
     CLLocationCoordinate2D c1 = [[self.waypointMission waypointAtIndex: 0] coordinate];
     CLLocationCoordinate2D c2 = [[self.waypointMission waypointAtIndex: 1] coordinate];
     
-    if ([FlightPlanner distBetweenCoords:c1 to:c2] > 2500) {
-        [self ShowMessage:@"" message:@"Survey over 2500m length limit" actionTitle:@"OK"];
+    if ([FlightPlanner distBetweenCoords:c1 to:c2] > 5000) {
+        [self ShowMessage:@"" message:@"Survey over 5000m length limit" actionTitle:@"OK"];
         return;
     }
     
-    if ([FlightPlanner totalWaypoints:c1 to:c2] > 98) {
+    if ([[FlightPlanner generateWaypointMission:c1 to:c2] count] > 98) {
         [self ShowMessage:@"" message:@"Mission would have over 98 waypoints - would be unable to create a waypoint Mission" actionTitle:@"OK"];
         return;
     }

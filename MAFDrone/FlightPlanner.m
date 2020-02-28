@@ -72,7 +72,10 @@ const double surveyWidth = 30;
     }
     bool goRight = TRUE;
     
-    for (double y = -yStart; y < surveyWidth / 2; y += pictureDist) {
+    double y = -yStart - pictureDist;
+    //for (double y = -yStart; y + pictureWidth / 2 < surveyWidth / 2; y += pictureDist) {
+    while (y + pictureWidth / 2 < surveyWidth / 2) {
+        y += pictureDist;
         if (goRight) {
             for (double x = 0; x < surveyLength; x += pictureDist) {
                 [points addObject: [[CoordObject alloc] initWithDat:x dat2:y]];
@@ -129,12 +132,14 @@ const double surveyWidth = 30;
     MAFDistanceHeading surveyLength = [FlightPlanner distBetweenPoint:coord1 toPoint:coord2];
     //distance is distance of the survey
     //angle is reference angle (in radians)
-
-    
     double pictureDist = (pictureWidth + sqrt(1-overlapPct) * pictureWidth) / 2;
-    int width = ceil(surveyWidth/pictureDist);
-    int length =  ceil(surveyLength.distance/pictureDist);
-    return width * length;
+    double yStart = 0;
+    int width = 1;
+    while (yStart + pictureWidth / 2 < surveyWidth / 2) {
+        yStart += pictureDist;
+        width += 2;
+    }
+    return width;
 }
 
 @end

@@ -48,6 +48,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _mapView.mapType = MKMapTypeHybrid;
     
     [self registerApp];
     
