@@ -14,6 +14,13 @@
 
 #pragma mark - IBAction Methods
 
+- (IBAction)uploadBtnAction:(id)sender {
+
+    if ([_delegate respondsToSelector:@selector(uploadBtnActionInGSButtonVC:)]) {
+        [_delegate uploadBtnActionInGSButtonVC:self];
+    }
+}
+
 - (IBAction)startBtnAction:(id)sender {
 
     if ([_delegate respondsToSelector:@selector(startBtnActionInGSButtonVC:)]) {

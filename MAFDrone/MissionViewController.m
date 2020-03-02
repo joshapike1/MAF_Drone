@@ -48,7 +48,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _mapView.mapType = MKMapTypeHybrid;
+    //_mapView.mapType = MKMapTypeHybrid;
     
     [self registerApp];
     
@@ -99,30 +99,54 @@
     [self.view addSubview:self.gsButtonVC.view];
 }
 
-/*Initialize mission parameters (possibly load mission to drone)
- -Checks there are waypoints on map/loaded into waypointMission
- -Sets altitude to 10 for all waypoints
- -Sets max flight speed to 10m/s and auto flight speed to 5m/s
- -sets the headingMode to InitialDirection and finishAction to GoHome
- -Was previously "Finished" button
- */
-- (void)initMission
+- (void)CreateMission
 {
+    NSArray* wayPoints = self.mapController.wayPoints;
+    NSLog(@"Num waypoints: %lu", wayPoints.count);
+    if (wayPoints == nil || wayPoints.count < 2) { //DJIWaypointMissionMinimumWaypointCount is 2.
+        NSLog(@"Not enough waypoints");
+        [self ShowMessage:@"No or not enough waypoints for mission" message:@"Upload Mission Finished" actionTitle:@"OK"];
+        return;
+    }
+    
+    if (self.waypointMission){
+        NSLog(@"Deleting waypoints");
+        [self.waypointMission removeAllWaypoints];
+    }
+    else{
+        NSLog(@"No old waypoint mission!");
+        self.waypointMission = [[DJIMutableWaypointMission alloc] init];
+    }
+    
+    for (int i = 0; i < wayPoints.count; i++) {
+        CLLocation* location = [wayPoints objectAtIndex:i];
+        if (CLLocationCoordinate2DIsValid(location.coordinate)) {
+            DJIWaypoint* waypoint = [[DJIWaypoint alloc] initWithCoordinate:location.coordinate];
+            [self.waypointMission addWaypoint:waypoint];
+        }
+    }
+    NSLog(@"Waypoints Added");
+}
+
+- (void) ConfigMission {
+    
     for (int i = 0; i < self.waypointMission.waypointCount; i++) {
         DJIWaypoint* waypoint = [self.waypointMission waypointAtIndex:i];
-        
-        ///<-------------------NEEDS TO BE CALCULATED--------------------------->
-        waypoint.altitude = 10; //Set altitude to 10m
+        waypoint.altitude = 10; //Set altitude to 10
     }
+     NSLog(@"Waypoints added again");
+    NSLog(@"ANum waypoints again: %lu", self.waypointMission.waypointCount);
     
     self.waypointMission.maxFlightSpeed = 10; //Set max speeed to 10m/s
     self.waypointMission.autoFlightSpeed = 5; //Set auto flight speed to 5m/s
+    NSLog(@"   Max speed and flight speed set");
     
     self.waypointMission.headingMode = DJIWaypointMissionHeadingUsingInitialDirection;
     self.waypointMission.finishedAction = DJIWaypointMissionFinishedGoHome;
+    NSLog(@"Heading and finish actino set");
     
-    ///<--------------------------This loads the mission, will need to put somewhere----------------------------->
     [[self missionOperator] loadMission:self.waypointMission];
+    NSLog(@"Mission loading");
     
     WeakRef(target);
     
@@ -131,18 +155,36 @@
         WeakReturn(target);
         
         if (error) {
+            NSLog(@"Mission failed to execute");
             [target showAlertViewWithTitle:@"Mission Execution Failed" withMessage:[NSString stringWithFormat:@"%@", error.description]];
         }
         else {
+            NSLog(@"Mission finished executing!");
             [target showAlertViewWithTitle:@"Mission Execution Finished" withMessage:nil];
         }
     }];
     
     [[self missionOperator] uploadMissionWithCompletion:^(NSError * _Nullable error) {
         if (error){
-            [self ShowMessage:@"Upload Mission Failed" message:@"Most likely not connected to drone" actionTitle:@"OK"];
+            NSLog(@"Mission failed to upload to drone");
+            NSString* uploadError = [NSString stringWithFormat:@"Upload Mission failed:%@", error.description];
+            [self ShowMessage:@"" message:uploadError actionTitle:@"OK"];
         }else {
-            [self ShowMessage:@"" message:@"Upload Mission Finished" actionTitle:@"OK"];
+            NSLog(@"Mission uploaded to drone!");
+            [self ShowMessage:@"Upload Mission Finished" message:@"Upload Mission Finished" actionTitle:@"OK"];
+        }
+    }];
+}
+
+- (void)StartMission {
+    [[self missionOperator] startMissionWithCompletion:^(NSError * _Nullable error) {
+        if (error){
+            NSLog(@"Mission failed to start");
+          [self ShowMessage:@"Start Mission Failed" message:error.description actionTitle:@"OK" ];
+        }else
+        {
+            NSLog(@"Mission loading and starting successful!");
+            [self ShowMessage:@"" message:@"Mission Started" actionTitle:@"OK"];
         }
     }];
 }
@@ -314,17 +356,23 @@
 
 - (void)startBtnActionInGSButtonVC:(MissionButtonViewController *)GSBtnVC
 {
-    [self initMission];
-    [self createMission:nil];
-    [[self missionOperator] startMissionWithCompletion:^(NSError * _Nullable error) {
-        if (error){
-            [self ShowMessage:@"Start Mission Failed" message:error.description actionTitle:@"OK"];
-        }else
-        {
-            [self ShowMessage:@"" message:@"Mission Started" actionTitle:@"OK"];
-        }
-    }];
+    NSLog(@"Start Button Pressed");
     
+    NSLog(@"Starting Mission");
+    [self StartMission];
+    NSLog(@"Mission Started");
+}
+
+- (void)uploadBtnActionInGSButtonVC:(MissionButtonViewController *)GSBtnVC
+{
+    NSLog(@"Upload Button Pressed");
+    
+    NSLog(@"Creating Mission");
+    [self CreateMission];
+    NSLog(@"Creation Finished");
+    NSLog(@"Configuring Mission");
+    [self ConfigMission];
+    NSLog(@"Configuration Finished");
 }
 
 #pragma mark - CLLocationManagerDelegate

@@ -406,8 +406,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     </view>
                     <connections>
+                        <outlet property="altitudeLabel" destination="JPX-WX-2xQ" id="LCN-wd-9t2"/>
+                        <outlet property="gpsLabel" destination="lTe-Jw-YPK" id="GBt-hv-CMB"/>
+                        <outlet property="hsLabel" destination="gJL-vc-z0M" id="Y6Y-bY-Bsk"/>
                         <outlet property="mapView" destination="Aa6-qh-xPL" id="in6-EQ-jxi"/>
-                        <outlet property="topBarView" destination="FfW-n4-idv" id="zFv-Xz-7tO"/>
+                        <outlet property="modeLabel" destination="VAd-Yy-I3v" id="6Ch-z8-fck"/>
+                        <outlet property="topBarView" destination="FfW-n4-idv" id="LBp-Og-cU7"/>
+                        <outlet property="view" destination="Sd9-yT-Opb" id="Y8Y-Cl-9su"/>
+                        <outlet property="vsLabel" destination="eMh-81-Pxq" id="NEx-Kc-RcU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ohn-GS-UFR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -422,6 +428,6 @@
         <image name="square.and.arrow.up" catalog="system" width="56" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Wo5-uY-gyz"/>
+        <segue reference="Pfd-ja-52t"/>
     </inferredMetricsTieBreakers>
 </document>

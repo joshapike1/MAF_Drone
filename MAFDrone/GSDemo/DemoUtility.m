@@ -1,6 +1,7 @@
 #import "DemoUtility.h"
 #import <DJISDK/DJISDK.h>
 #import "DJIRootViewController.h"
+#import "MissionViewController.h"
 
 @implementation DemoUtility
 
