@@ -103,11 +103,12 @@
 {
     NSArray* wayPoints = self.mapController.wayPoints;
     NSLog(@"Num waypoints: %lu", wayPoints.count);
-    if (wayPoints == nil || wayPoints.count < 2) { //DJIWaypointMissionMinimumWaypointCount is 2.
+    
+    /*if (wayPoints == nil || wayPoints.count < 2) { //DJIWaypointMissionMinimumWaypointCount is 2.
         NSLog(@"Not enough waypoints");
         [self ShowMessage:@"No or not enough waypoints for mission" message:@"Upload Mission Finished" actionTitle:@"OK"];
         return;
-    }
+    }*/ //Will not be two given the situation we have.
     
     if (self.waypointMission){
         NSLog(@"Deleting waypoints");
@@ -118,10 +119,17 @@
         self.waypointMission = [[DJIMutableWaypointMission alloc] init];
     }
     
+    
+    self.waypointMission.rotateGimbalPitch = YES; //enable moving the camera gimbal
     for (int i = 0; i < wayPoints.count; i++) {
         CLLocation* location = [wayPoints objectAtIndex:i];
         if (CLLocationCoordinate2DIsValid(location.coordinate)) {
             DJIWaypoint* waypoint = [[DJIWaypoint alloc] initWithCoordinate:location.coordinate];
+            waypoint.gimbalPitch = -90.0; //POINT CAMERA STRAIGHT DOWN
+            
+            DJIWaypointAction* action = [[DJIWaypointAction alloc] initWithActionType:DJIWaypointActionTypeShootPhoto param:0]; //param is ignored for this action
+            [waypoint addAction: action]; //take a photo at this waypoint
+            
             [self.waypointMission addWaypoint:waypoint];
         }
     }
