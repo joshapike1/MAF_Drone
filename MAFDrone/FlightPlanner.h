@@ -29,13 +29,14 @@ typedef struct MAFDistanceHeading MAFDistanceHeading;
 
 @interface FlightPlanner:NSObject
 + (CoordObject*) toMagBearing: (CoordObject*)point referenceAngle: (double)ref;
++ (double) heightForResolution:(double)des_res;
 + (double) magnitude: (CoordObject*) point;
 + (double) distanceBetweenPictures: (double)p_width overlap: (double)k;
 + (MAFDistanceHeading) distBetweenPoint: (CLLocationCoordinate2D)coord1 toPoint: (CLLocationCoordinate2D)coord2;
 + (CoordObject*) destinationCoordinate: (CLLocationCoordinate2D)reference distance:(double)d bearing:(double)b;
-+ (NSMutableArray*) generateWaypointMission:(CLLocationCoordinate2D)reference to: (CLLocationCoordinate2D)endpoint;
++ (NSMutableArray*) generateWaypointMission:(CLLocationCoordinate2D)reference to: (CLLocationCoordinate2D)endpoint resolution:(double)resolution width:(double)surveyWidth;
 + (double) distBetweenCoords: (CLLocationCoordinate2D)coord1 to:(CLLocationCoordinate2D) coord2;
-+ (int) totalWaypoints: (CLLocationCoordinate2D) coord1 to:(CLLocationCoordinate2D) coord2;
++ (int) totalWaypoints: (CLLocationCoordinate2D) coord1 to:(CLLocationCoordinate2D) coord2 resolution: (double) res width: (double)surveyWidth;
 @end
 
 #endif /* FlightPlanner_h */

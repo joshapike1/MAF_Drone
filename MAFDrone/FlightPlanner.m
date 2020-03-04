@@ -13,9 +13,23 @@
 @implementation FlightPlanner
 
 const double radius = 6371008.8;
-const double pictureWidth = 20;
+const double picWidthPx = 2250;
 const double overlapPct = 0.3;
-const double surveyWidth = 30;
+const double res_limit = 2.0;
+
+const double ref_height = 60.96; //cm
+const double ref_resolution = 0.020371617; //cm/pix
+
++ (double) heightForResolution:(double)des_res {
+    if (des_res > res_limit) {
+        des_res = res_limit;
+    }
+    double alt = ref_height / ref_resolution * des_res / 100.0; //div by 100 to covert to m
+    if (alt <= 50.0) {
+        return alt;
+    }
+    return 50.0;
+}
 
 //after functions are done, we convert back to degrees
 + (CoordObject*) toMagBearing: (CoordObject*)point referenceAngle: (double)ref {
@@ -63,7 +77,7 @@ const double surveyWidth = 30;
     return [[CoordObject alloc] initWithDat:lat2 * 180 / M_PI dat2:lon2 * 180 / M_PI];
 }
 
-+ (NSMutableArray*) generateXYpointsPictureDist:(double)pictureDist surveyWidth: (double)surveyWidth surveyLength: (double) surveyLength {
++ (NSMutableArray*) generateXYpointsPictureDist:(double)pictureDist picWidth:(double)pictureWidth surveyWidth: (double)surveyWidth surveyLength: (double) surveyLength {
     //TODO: perhaps not hardcoding this array capacity
     NSMutableArray* points = [NSMutableArray arrayWithCapacity: 999];
     double yStart = 0;
@@ -108,15 +122,24 @@ const double surveyWidth = 30;
     return output;
 }
 
-+ (NSMutableArray*) generateWaypointMission:(CLLocationCoordinate2D)reference to: (CLLocationCoordinate2D)endpoint {
++ (double) pictureWidth:(double) resolution {
+    return picWidthPx * resolution / 100;
+}
+
++ (NSMutableArray*) generateWaypointMission:(CLLocationCoordinate2D)reference to: (CLLocationCoordinate2D)endpoint resolution:(double) resolution width:(double)surveyWidth {
     MAFDistanceHeading surveyLength = [FlightPlanner distBetweenPoint:reference toPoint:endpoint];
     //distance is distance of the survey
     //angle is reference angle (in radians)
+    if (resolution > res_limit) {
+        resolution = res_limit;
+    }
 
-    
+    double pictureWidth = picWidthPx * resolution / 100;
     double pictureDist = (pictureWidth + sqrt(1-overlapPct) * pictureWidth) / 2;
+    NSLog(@"width of pictures: %f", pictureWidth);
+    NSLog(@"distance between pictures: %f", pictureDist);
     
-    NSMutableArray* xyPoints = [FlightPlanner generateXYpointsPictureDist:pictureDist surveyWidth:surveyWidth surveyLength:surveyLength.distance];
+    NSMutableArray* xyPoints = [FlightPlanner generateXYpointsPictureDist:pictureDist picWidth:pictureWidth surveyWidth:surveyWidth surveyLength:surveyLength.distance];
     NSMutableArray* rThPoints = [FlightPlanner rotatePoints: xyPoints referenceAngle: surveyLength.heading];
     NSMutableArray* gpsCoords = [FlightPlanner rTHtoGpsCoords:rThPoints referenceCoord:reference];
     
@@ -128,18 +151,20 @@ const double surveyWidth = 30;
     return surveyLength.distance;
 }
 
-+ (int) totalWaypoints: (CLLocationCoordinate2D) coord1 to:(CLLocationCoordinate2D) coord2 {
++ (int) totalWaypoints: (CLLocationCoordinate2D) coord1 to:(CLLocationCoordinate2D) coord2 resolution: (double) res width: (double)surveyWidth {
     MAFDistanceHeading surveyLength = [FlightPlanner distBetweenPoint:coord1 toPoint:coord2];
     //distance is distance of the survey
     //angle is reference angle (in radians)
-    double pictureDist = (pictureWidth + sqrt(1-overlapPct) * pictureWidth) / 2;
-    double yStart = 0;
-    int width = 1;
-    while (yStart + pictureWidth / 2 < surveyWidth / 2) {
-        yStart += pictureDist;
-        width += 2;
+    
+    if (res > res_limit) {
+        res = res_limit;
     }
-    return width;
+    double pictureWidth = picWidthPx * res / 100;
+    double pictureDist = (pictureWidth + sqrt(1-overlapPct) * pictureWidth) / 2;
+    
+    double width = ceil(surveyWidth/pictureDist);
+    double length = ceil(surveyLength.distance/pictureDist);
+    return (int) (width * length);
 }
 
 @end

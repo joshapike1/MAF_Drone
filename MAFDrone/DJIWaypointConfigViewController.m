@@ -22,7 +22,7 @@
 - (void)initUI
 {
     self.nameTextField.text = @""; //Set the name to "" (Default)
-    self.resolutionTextField.text = @"4"; //Set the resolution to 4 (Default)
+    self.resolutionTextField.text = @"1"; //Set the resolution to 1 (Default)
     self.widthTextField.text = @"15"; //Set the width to 15 meters (default)
     
 }

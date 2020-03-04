@@ -45,8 +45,10 @@ int width;
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         MissionViewController *vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"MissionViewController"];
         [self presentViewController:vc animated:YES completion:nil];
+        vc.resolution = resolution;
+        vc.survey_width = width;
         [vc populateMaplat1:lat1 lon1:long1 lat2:lat2 lon2:long2];
-        NSLog(@"this shouldn't execute");
+        NSLog(@"this shouldn't execute"); //kept for comedy
     }
 }
 

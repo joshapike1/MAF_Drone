@@ -257,7 +257,12 @@
         return;
     }
     
-    if ([[FlightPlanner generateWaypointMission:c1 to:c2] count] > 98) {
+    //WOAH ZONE:
+    double res = 1.0;
+    double width = 15.0;
+    
+    
+    if ([[FlightPlanner generateWaypointMission: c1 to: c2 resolution:res width:width] count] > 98) {
         [self ShowMessage:@"" message:@"Mission would have over 98 waypoints - would be unable to create a waypoint Mission" actionTitle:@"OK"];
         return;
     }

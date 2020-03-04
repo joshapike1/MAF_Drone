@@ -119,13 +119,19 @@
         self.waypointMission = [[DJIMutableWaypointMission alloc] init];
     }
     
-    
+    double missionAltitude = [FlightPlanner heightForResolution:_resolution];
+    NSLog(@"Altitude: %f", missionAltitude);
     self.waypointMission.rotateGimbalPitch = YES; //enable moving the camera gimbal
     for (int i = 0; i < wayPoints.count; i++) {
         CLLocation* location = [wayPoints objectAtIndex:i];
         if (CLLocationCoordinate2DIsValid(location.coordinate)) {
             DJIWaypoint* waypoint = [[DJIWaypoint alloc] initWithCoordinate:location.coordinate];
             waypoint.gimbalPitch = -90.0; //POINT CAMERA STRAIGHT DOWN
+            waypoint.altitude = missionAltitude;
+            if (i == 0) {
+                DJIWaypointAction* a = [[DJIWaypointAction alloc] initWithActionType:DJIWaypointActionTypeStay param:7000];
+                [waypoint addAction:a];
+            }
             
             DJIWaypointAction* action = [[DJIWaypointAction alloc] initWithActionType:DJIWaypointActionTypeShootPhoto param:0]; //param is ignored for this action
             [waypoint addAction: action]; //take a photo at this waypoint
@@ -411,8 +417,11 @@
 - (void)populateMaplat1: (double)lat1 lon1: (double)lon1 lat2: (double)lat2 lon2: (double)lon2 {
     CLLocationCoordinate2D Point1 = [CoordObject toStructLat:lat1 lon:lon1];
     CLLocationCoordinate2D Point2 = [CoordObject toStructLat:lat2 lon:lon2];
-    NSMutableArray* arr = [FlightPlanner generateWaypointMission:Point1 to:Point2];
-    
+    NSLog(@"resolution: %f width: %f", _resolution, _survey_width);
+    double missionAltitude = [FlightPlanner heightForResolution:_resolution];
+    NSLog(@"Altitude: %f", missionAltitude);
+    NSMutableArray* arr = [FlightPlanner generateWaypointMission:Point1 to:Point2 resolution:_resolution width:_survey_width];
+    NSLog(@"Number of waypoints: %lu", (unsigned long)[arr count]);
     for (CoordObject* point in arr) {
         CLLocationCoordinate2D coord = [point toStruct];
         [self.mapController addLocation:coord withMapView:self.mapView];
