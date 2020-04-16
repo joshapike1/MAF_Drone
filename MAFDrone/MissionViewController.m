@@ -30,6 +30,8 @@
 @property(nonatomic, strong) IBOutlet UILabel* altitudeLabel;
 
 @property(nonatomic, strong) DJIMutableWaypointMission* waypointMission;
+@property(nonatomic) MAFDistanceHeading headingData;
+
 @end
 
 @implementation MissionViewController
@@ -121,12 +123,17 @@
     
     double missionAltitude = [FlightPlanner heightForResolution:_resolution];
     NSLog(@"Altitude: %f", missionAltitude);
+    
+    
+    
     self.waypointMission.rotateGimbalPitch = YES; //enable moving the camera gimbal
+    self.waypointMission.headingMode = DJIWaypointMissionHeadingUsingWaypointHeading;
     for (int i = 0; i < wayPoints.count; i++) {
         CLLocation* location = [wayPoints objectAtIndex:i];
         if (CLLocationCoordinate2DIsValid(location.coordinate)) {
             DJIWaypoint* waypoint = [[DJIWaypoint alloc] initWithCoordinate:location.coordinate];
             waypoint.gimbalPitch = -90.0; //POINT CAMERA STRAIGHT DOWN
+            waypoint.heading = self.headingData.heading;
             waypoint.altitude = missionAltitude;
             if (i == 0) {
                 DJIWaypointAction* a = [[DJIWaypointAction alloc] initWithActionType:DJIWaypointActionTypeStay param:7000];
@@ -417,6 +424,7 @@
 - (void)populateMaplat1: (double)lat1 lon1: (double)lon1 lat2: (double)lat2 lon2: (double)lon2 {
     CLLocationCoordinate2D Point1 = [CoordObject toStructLat:lat1 lon:lon1];
     CLLocationCoordinate2D Point2 = [CoordObject toStructLat:lat2 lon:lon2];
+    self.headingData = [FlightPlanner distBetweenPoint:Point1 toPoint:Point2];
     NSLog(@"resolution: %f width: %f", _resolution, _survey_width);
     double missionAltitude = [FlightPlanner heightForResolution:_resolution];
     NSLog(@"Altitude: %f", missionAltitude);
