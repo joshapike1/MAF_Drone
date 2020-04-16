@@ -7,6 +7,7 @@
 #import "MissionButtonViewController.h"
 //#import "DJIWaypointConfigViewController.h"
 #import "DemoUtility.h"
+#import <math.h>
 
 #define ENTER_DEBUG_MODE 0
 
@@ -124,7 +125,10 @@
     double missionAltitude = [FlightPlanner heightForResolution:_resolution];
     NSLog(@"Altitude: %f", missionAltitude);
     
-    
+    double head = self.headingData.heading;
+    if (head > 180) {
+        head = head - 360;
+    }
     
     self.waypointMission.rotateGimbalPitch = YES; //enable moving the camera gimbal
     self.waypointMission.headingMode = DJIWaypointMissionHeadingUsingWaypointHeading;
@@ -133,7 +137,7 @@
         if (CLLocationCoordinate2DIsValid(location.coordinate)) {
             DJIWaypoint* waypoint = [[DJIWaypoint alloc] initWithCoordinate:location.coordinate];
             waypoint.gimbalPitch = -90.0; //POINT CAMERA STRAIGHT DOWN
-            waypoint.heading = self.headingData.heading;
+            waypoint.heading = head;
             waypoint.altitude = missionAltitude;
             if (i == 0) {
                 DJIWaypointAction* a = [[DJIWaypointAction alloc] initWithActionType:DJIWaypointActionTypeStay param:7000];
